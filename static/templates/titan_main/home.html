@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>主页</title>
+</head>
+<body>
+    <h1>你好, {{ request.user.username }}</h1>
+    <p>Token: {{ token }}</p>
+    <p>Notifications: {{ notifications }}</p>
+    <a href="{% url 'logout' %}">注销</a>
+</body>
+</html>
