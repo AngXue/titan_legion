@@ -25,7 +25,7 @@
 > 用户可以在此界面通过复选框选择一个击杀记录，而后填写补损说明，提交补损申请。
 - `订单管理页面`
 ![ui_example_07.png](readme_images/ui_example_07.png)
-> 此页面显示该用户关于LP兑换商品的订单信息，包括订单号、订单创建时间、订单状态、消耗的LP、兑换的商品名及其数量、发起人昵称、发起人用户名。
+> 此页面显示该用户关于LP兑换商品的订单信息，包括订单号、订单创建时间、订单状态、消耗的LP、兑换的商品名、兑换的商品单价、兑换的商品数量、发起人昵称、发起人用户名。
 > 用户可以通过订单状态筛选订单，订单状态有：`通过`、`拒绝`、`待审批`。
 ### 管理员权限页面
 - `发放LP页面`
@@ -82,36 +82,36 @@
 
 ## 实体设计（不包含`id`）
 
-### 用户
+### 用户 `user`
 - `username` 用户名 `str` （唯一值，直接来自游戏角色属性）
 - `nickname` 昵称 `str` （用户自定义）
 - `pap` 联盟贡献度 `str` （直接来自联盟接口）
 - `isk` 游戏角色金额 `str` （直接来自游戏角色属性）
 - `skill` 游戏角色技能点 `str` （直接来自游戏角色属性）
-- `lp` 军团贡献度 `str` （用户剩余的LP总数，初始为0，不可小于0）
-- `used_lp` 已使用的LP总数 `str` （初始为0，不可小于0）
-- `role` 用户角色 `str` （普通用户、管理员）
+- `lp` 军团贡献度 `str` （用户剩余的LP总数，初始为`0`，可小于`0`）
+- `used_lp` 已使用的LP总数 `str` （初始为`0`，不可小于`0`）
+- `role` 用户角色 `str` （普通用户：`0`，管理员：`1`）
 
-### 商品
+### 商品 `item`
 - `item_name` 商品名称 `str` （唯一值）
-- `item_price` 商品价格 `str` （不可小于0）
+- `item_price` 商品价格 `str` （不可小于`0`）
 - `item_description` 商品描述 `str` （商品的详细描述）
 - `item_image` 商品图片 `str` （商品的图片链接）
 
-### 订单
+### 订单 `order`
 - `order_id` 订单号 `str` （唯一值）
 - `order_time` 订单创建时间 `str` （订单创建的时间）
-- `order_status` 订单状态 `str` （通过、拒绝、待审批）
-- `lp_cost` 消耗的LP `str` （不可小于0）
+- `order_status` 订单状态 `str` （通过：`true`、拒绝：`false`、待审批：`none`）
+- `lp_cost` 消耗的LP `str` （不可小于`0`）
 - `item_name` 兑换的商品名 `str` （不可为空）
-- `item_quantity` 兑换的商品数量 `str` （不可小于0）
+- `item_quantity` 兑换的商品数量 `str` （不可小于`0`）
 - `nickname` 发起人昵称 `str` （订单发起人的昵称）
 - `username` 发起人用户名 `str` （订单发起人的用户名）
 
-### 补损申请
+### 补损申请 `apply`
 - `apply_id` 申请编号 `str` （唯一值）
 - `apply_time` 申请时间 `str` （申请创建的时间）
-- `apply_status` 申请状态 `str` （通过、拒绝、待审批）
+- `apply_status` 申请状态 `str` （通过：`true`、拒绝：`false`、待审批：`none`）
 - `nickname` 申请人昵称 `str` （申请人的昵称）
 - `username` 申请人用户名 `str` （申请人的用户名）
 - `kill_record` 击杀记录 `dict` （字典类型，用户提交的击杀记录）
@@ -122,7 +122,155 @@
   - `kill_location` 击杀地点 `str` （击杀地点）
 - `apply_description` 补损说明 `str` （用户填写的补损说明）
 
-## 接口设计
-### 用户默认首页
+## 接口设计（测试前缀`localhost:8000`）
+
+- 模板案例
+  - `/api/` `GET`
+  - 输入：
+    > ```json
+    > {
+    >   "key1": "value1",
+    >   "key2": "value2"
+    > }
+    > ```
+  - 输出：
+    > ```json
+    > {
+    >   "results": {
+    >     "result": "true/false",
+    >     "message": "message",
+    >     "data": {
+    >       "key3": "value3",
+    >       "key4": "value4"
+    >     } 
+    >   }
+    > }
+    > ```
+
+### 用户模块
 - 获取用户基本信息
-  - `TODO`
+  - `/api/user/get_user_base_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：{`username`: value} （此后未经说明，一律简化）
+  - 输出：`results`{`result`: true, `message`: "获取成功", `data`{`user`{`username`: value,`nickname`: value,`pap`: value,`isk`: value,`skill`: value}}} （此后未经说明，一律简化）
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取用户权限信息
+  - `/api/user/get_user_role_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "获取成功", `data`{`user`{`role`}}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取用户LP信息
+  - `/api/user/get_user_lp_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "获取成功", `data`{`user`{`lp`, `used_lp`}}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取全部用户信息
+  - `/api/user/get_all_user_info/` `GET`
+  - 权限：管理员
+  - 输入：无
+  - 输出：`result`: true, `message`: "获取成功", `data`{`user`{`username`, `nickname`, `pap`, `isk`, `skill`, `lp`, `used_lp`, `role`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 修改用户昵称
+  - `/api/user/update_user_nickname/` `POST`
+  - 权限：普通用户、管理员
+  - 输入：`username`, `nickname`
+  - 输出：`result`: true, `message`: "修改成功", `data`: {`user`{`nickname`}}
+  - 输出：`result`: false, `message`: "修改失败", `data`: {}
+- 修改用户LP
+  - `/api/user/add_user_lp/` `POST`
+  - 权限：管理员
+  - 输入：{`user`{`username`, `add_lp`(浮点型字符串，范围[-999, 999])}, ...}
+  - 输出：`result`: true, `message`: "修改成功", `data`: {`user`{`lp`, `used_lp`}} （无论是购买商品还是管理员手动操作，若`add_lp`为负数，则在后端更新`userd_lp`）
+  - 输出：`result`: false, `message`: "修改失败", `data`: {}
+- 删除用户
+  - `/api/user/delete_user/` `POST`
+  - 权限：管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "删除成功", `data`: {}
+  - 输出：`result`: false, `message`: "删除失败，管理员无法删除管理员", `data`: {}
+
+### 商品模块
+- 获取全部商品信息
+  - `/api/item/get_all_item_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：无
+  - 输出：`result`: true, `message`: "获取成功", `data`{`item`{`item_name`, `item_price`, `item_description`, `item_image`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 增加商品
+  - `/api/item/add_item/` `POST`
+  - 权限：管理员
+  - 输入：`item_name`, `item_price`(浮点型字符串，范围[0, 999]), `item_description`, `item_image`
+  - 输出：`result`: true, `message`: "添加成功", `data`: {`item`{`item_name`, `item_price`, `item_description`, `item_image`}}
+  - 输出：`result`: false, `message`: "添加失败，商品名冲突", `data`: {}
+- 删除商品
+  - `/api/item/delete_item/` `POST`
+  - 权限：管理员
+  - 输入：`item_name`
+  - 输出：`result`: true, `message`: "删除成功", `data`: {}
+  - 输出：`result`: false, `message`: "删除失败", `data`: {}
+- 修改商品
+  - `/api/item/update_item/` `POST`
+  - 权限：管理员
+  - 输入：`item_name`, `item_price`(浮点型字符串，范围[0, 999]), `item_description`, `item_image`
+  - 输出：`result`: true, `message`: "修改成功", `data`: {`item`{`item_name`, `item_price`, `item_description`, `item_image`}}
+  - 输出：`result`: false, `message`: "修改失败，商品名冲突", `data`: {}
+
+### 订单模块
+- 获取指定用户订单信息
+  - `/api/order/get_user_order_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "获取成功", `data`{`order`{`order_id`, `order_time`, `order_status`, `lp_cost`, `item_name`, `item_price`, `item_quantity`, `nickname`, `username`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取全部订单信息
+  - `/api/order/get_all_order_info/` `GET`
+  - 权限：管理员
+  - 输入：无
+  - 输出：`result`: true, `message`: "获取成功", `data`{`order`{`order_id`, `order_time`, `order_status`, `lp_cost`, `item_name`, `item_price`, `item_quantity`, `nickname`, `username`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 新建订单
+  - `/api/order/add_order/` `POST`
+  - 权限：普通用户，管理员
+  - 输入：`username`, `lp_cost`(浮点型字符串，范围[0, 999]，且不得超过用户当前`lp`), `item_name`, `item_quantity`(整型字符串，范围[1, 999])
+  - 输出：`result`: true, `message`: "添加成功", `data`: {`order`{`order_id`, `order_time`, `order_status`: none, `lp_cost`, `item_name`,`item_price`,  `item_quantity`, `nickname`, `username`}, `user`{`lp`, `used_lp`}} （新建订单后，在后端更新用户`lp`和`used_lp`）
+  - 输出：`result`: false, `message`: "添加失败", `data`: {}
+- 修改订单状态
+  - `/api/order/update_order_status/` `POST`
+  - 权限：管理员
+  - 输入：{`order`{`order_id`, `order_status`(通过：`true`，拒绝：`false`，待审批：`none`)}, ...}
+  - 输出：`result`: true, `message`: "修改成功", `data`: {`order`{`order_id`, `order_status`}, ...}
+  - 输出：`result`: false, `message`: "修改失败", `data`: {}
+
+### 补损模块
+- 获取指定用户击杀记录
+- `/api/apply/get_user_kill_record/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "获取成功", `data`{`kill_record`{`kill_kmid`, `kill_time`, `kill_ship`, `kill_value`, `kill_location`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取指定用户补损申请信息
+  - `/api/apply/get_user_apply_info/` `GET`
+  - 权限：普通用户、管理员
+  - 输入：`username`
+  - 输出：`result`: true, `message`: "获取成功", `data`{`apply`{`apply_id`, `apply_time`, `apply_status`, `nickname`, `username`, `kill_record`, `apply_description`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 获取全部补损申请信息
+  - `/api/apply/get_all_apply_info/` `GET`
+  - 权限：管理员
+  - 输入：无
+  - 输出：`result`: true, `message`: "获取成功", `data`{`apply`{`apply_id`, `apply_time`, `apply_status`, `nickname`, `username`, `kill_record`, `apply_description`}, ...}
+  - 输出：`result`: false, `message`: "获取失败", `data`: {}
+- 新建补损申请
+  - `/api/apply/add_apply/` `POST`
+  - 权限：普通用户，管理员
+  - 输入：`username`, `kill_record`{`kill_kmid`, `kill_time`, `kill_ship`, `kill_value`, `kill_location`}, `apply_description`
+  - 输出：`result`: true, `message`: "添加成功", `data`: {`apply`{`apply_id`, `apply_time`, `apply_status`: none, `nickname`, `username`, `kill_record`, `apply_description`}}
+  - 输出：`result`: false, `message`: "添加失败，已经申请过此损失", `data`: {}
+- 修改补损申请状态
+  - `/api/apply/update_apply_status/` `POST`
+  - 权限：管理员
+  - 输入：{`apply`{`apply_id`, `apply_status`(通过：`true`，拒绝：`false`，待审批：`none`)}, ...}
+  - 输出：`result`: true, `message`: "修改成功", `data`: {`apply`{`apply_id`, `apply_status`}, ...}
+  - 输出：`result`: false, `message`: "修改失败", `data`: {}
