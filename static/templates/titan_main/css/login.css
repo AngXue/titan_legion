@@ -1,5 +1,5 @@
 body {
-    background-image: url(../img/bg.jpg);
+    background-image: url(../img/bg.png);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -13,9 +13,10 @@ body {
     width: 100vw-160px;
     height: 76px;
     background-color: rgba(0,0,0,0.7);
-    /* background-image: url(../img/titan.png);
+    background-image: url(../img/titan.png);
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: center center;
+    background-size: contain;
     padding: 0 80px;
 }
 
@@ -29,13 +30,13 @@ body {
 .logo-img {
     display: inline-block;
     width: 133px;
-    height: 39px;
+    height: 41px;
     position: absolute;
     top: 19px;
-    /* background-image: url(../img/logo_8508cc1.png);
-    background-size: 133px 39px;
+    background-image: url(../img/logo.svg);
+    background-size: 133px 41px;
     background-position-y: 9px;
-    background-repeat: no-repeat; */
+    background-repeat: no-repeat;
 }
 
 .logo-img a {
@@ -44,12 +45,12 @@ body {
     height: 100%;
 }
 
-.head-body svg {
+/* .head-body svg {
     position: absolute;
     left: 50%;
     top: 0;
     transform: translate(-50%,0);
-}
+} */
 
 /* 内容区 */
 
