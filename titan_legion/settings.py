@@ -25,13 +25,30 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'esi',
+    'rest_framework',
     'titan_main',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.eveonline.EVEOnlineOAuth2',  # 修改OAuth2 中 REDIRECT_STATE 为 False
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+LOGIN_URL = '/login/'  # 登录页面URL
+LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
+LOGOUT_REDIRECT_URL = '/'  # 登出后的重定向URL
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
 
 SOCIAL_AUTH_EVEONLINE_KEY = '2e4a5a73c3ba48c5a963da3a0d6a2f11'
 SOCIAL_AUTH_EVEONLINE_SECRET = 'pTVjXmEBCNmDW3itG4ZCVXlrBTkcYG1qIpjxPE1T'
@@ -81,21 +98,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'titan_legion.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'titan_legion',
-        'USER': 'angxue',
-        'PASSWORD': '@362502JYAngXueYi',
-        'HOST': '124.221.185.93',
-        'PORT': '28456',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -136,6 +142,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
