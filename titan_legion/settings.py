@@ -25,8 +25,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'esi',
+    'rest_framework',
     'titan_main',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.eveonline.EVEOnlineOAuth2',  # 修改OAuth2 中 REDIRECT_STATE 为 False
@@ -81,21 +92,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'titan_legion.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'titan_legion',
-        'USER': 'angxue',
-        'PASSWORD': '@362502JYAngXueYi',
-        'HOST': '124.221.185.93',
-        'PORT': '28456',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
