@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/personalize.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-    {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#}
-    {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/login.css' %}">#}
-    {#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#}
+{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/login.css' %}">#}
+{#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#}
 </head>
 <body>
 <div class="head">
@@ -29,17 +29,17 @@
 
     </div>
     <div class="menu">
-                <span class="Targe login-Targe-root">
+                <a href="{% url 'titan_main:eve_auth' %}" class="Targe login-Targe-root">
                     <span class="Targe Targe-targe1">
                         <span class="Targe Targe-targe2">
                             <div class="text-box">
                                 <p class="eve-icon">
-                                    <a href="{% url 'titan_main:eve_auth' %}">登录</a>
+                                   LOGIN with EVE Online
                                 </p>
                             </div>
                         </span>
                     </span>
-                </span>
+                </a>
         </div>
     </div>
     <script src="../js/login.js"></script>
