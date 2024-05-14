@@ -83,14 +83,14 @@
 ## 实体设计（不包含`id`）
 
 ### 用户 `user`
-- `username` 用户名 `str` （唯一值，直接来自游戏角色属性）
+- `username` 用户名 `str` （唯一值，直接来自游戏角色属性，登录时储存在表`auth_user`中，名为`username`）
 - `nickname` 昵称 `str` （用户自定义）
 - `pap` 联盟贡献度 `float` （直接来自联盟接口）
 - `isk` 游戏角色金额 `float` （直接来自游戏角色属性）
 - `skill` 游戏角色技能点 `float` （直接来自游戏角色属性）
 - `lp` 军团贡献度 `float` （用户剩余的LP总数，初始为`0`，可小于`0`）
 - `used_lp` 已使用的LP总数 `float` （初始为`0`，不可小于`0`）
-- `role` 用户角色 `str` （普通用户：`0`，管理员：`1`）
+- `role` 用户角色 `str` （普通用户：`0`，管理员：`1`，储存在表`auth_user`中，名为`is_staff`）
 
 ### 商品 `item`
 - `item_name` 商品名称 `str` （唯一值）
