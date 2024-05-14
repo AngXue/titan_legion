@@ -44,6 +44,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+LOGIN_URL = '/login/'  # 登录页面URL
+LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
+LOGOUT_REDIRECT_URL = '/'  # 登出后的重定向URL
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
+
 SOCIAL_AUTH_EVEONLINE_KEY = '2e4a5a73c3ba48c5a963da3a0d6a2f11'
 SOCIAL_AUTH_EVEONLINE_SECRET = 'pTVjXmEBCNmDW3itG4ZCVXlrBTkcYG1qIpjxPE1T'
 ESI_SSO_CLIENT_ID = '9e3e47f247964dd8b4053eb9a7a27a87'
@@ -136,6 +142,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

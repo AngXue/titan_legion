@@ -19,7 +19,7 @@ def is_authenticated_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('titan_main:home')
     return render(request, 'titan_main/html/login.html')
 
 
@@ -31,26 +31,26 @@ def home_view(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('titan_main:home')
 
 
 def eve_auth_view(request):
     return redirect('social:begin', 'eveonline')
 
 
-@token_required(scopes=SCOPES_LIST)
-def temp(request, token):
-    character_id = token.character_id
-    required_scopes = ['esi-skills.read_skillqueue.v1']
-
-    # get a token
-    token = Token.get_token(character_id, required_scopes)
-
-    # call the endpoint
-    notifications = esi.client.Skills.get_characters_character_id_skillqueue(
-        character_id=character_id,
-        token=token.valid_access_token()
-    ).result()
+# @token_required(scopes=SCOPES_LIST)
+# def temp(request, token):
+#     character_id = token.character_id
+#     required_scopes = ['esi-skills.read_skillqueue.v1']
+#
+#     # get a token
+#     token = Token.get_token(character_id, required_scopes)
+#
+#     # call the endpoint
+#     notifications = esi.client.Skills.get_characters_character_id_skillqueue(
+#         character_id=character_id,
+#         token=token.valid_access_token()
+#     ).result()
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
