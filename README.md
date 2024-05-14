@@ -85,16 +85,16 @@
 ### 用户 `user`
 - `username` 用户名 `str` （唯一值，直接来自游戏角色属性）
 - `nickname` 昵称 `str` （用户自定义）
-- `pap` 联盟贡献度 `str` （直接来自联盟接口）
-- `isk` 游戏角色金额 `str` （直接来自游戏角色属性）
-- `skill` 游戏角色技能点 `str` （直接来自游戏角色属性）
-- `lp` 军团贡献度 `str` （用户剩余的LP总数，初始为`0`，可小于`0`）
-- `used_lp` 已使用的LP总数 `str` （初始为`0`，不可小于`0`）
+- `pap` 联盟贡献度 `float` （直接来自联盟接口）
+- `isk` 游戏角色金额 `float` （直接来自游戏角色属性）
+- `skill` 游戏角色技能点 `float` （直接来自游戏角色属性）
+- `lp` 军团贡献度 `float` （用户剩余的LP总数，初始为`0`，可小于`0`）
+- `used_lp` 已使用的LP总数 `float` （初始为`0`，不可小于`0`）
 - `role` 用户角色 `str` （普通用户：`0`，管理员：`1`）
 
 ### 商品 `item`
 - `item_name` 商品名称 `str` （唯一值）
-- `item_price` 商品价格 `str` （不可小于`0`）
+- `item_price` 商品价格 `float （不可小于`0`）
 - `item_description` 商品描述 `str` （商品的详细描述）
 - `item_image` 商品图片 `str` （商品的图片链接）
 
@@ -102,9 +102,9 @@
 - `order_id` 订单号 `str` （唯一值）
 - `order_time` 订单创建时间 `str` （订单创建的时间）
 - `order_status` 订单状态 `str` （通过：`true`、拒绝：`false`、待审批：`none`）
-- `lp_cost` 消耗的LP `str` （不可小于`0`）
+- `lp_cost` 消耗的LP `float` （不可小于`0`）
 - `item_name` 兑换的商品名 `str` （不可为空）
-- `item_quantity` 兑换的商品数量 `str` （不可小于`0`）
+- `item_quantity` 兑换的商品数量 `int` （不可小于`0`）
 - `nickname` 发起人昵称 `str` （订单发起人的昵称）
 - `username` 发起人用户名 `str` （订单发起人的用户名）
 
@@ -118,7 +118,7 @@
   - `kill_kmid` 击杀记录ID `str` （击杀记录的ID）
   - `kill_time` 击杀时间 `str` （击杀时间）
   - `kill_ship` 击杀船型 `str` （击杀船名）
-  - `kill_value` 击杀价值 `str` （击杀价值）
+  - `kill_value` 击杀价值 `float` （击杀价值）
   - `kill_location` 击杀地点 `str` （击杀地点）
 - `apply_description` 补损说明 `str` （用户填写的补损说明）
 
