@@ -30,11 +30,11 @@ body {
 .logo-img {
     display: inline-block;
     width: 133px;
-    height: 41px;
+    height: 63px;
     position: absolute;
-    top: 19px;
+    top: 6px;
     background-image: url(../img/logo.svg);
-    background-size: 133px 41px;
+    background-size: 75% 75%;
     background-position-y: 9px;
     background-repeat: no-repeat;
 }
@@ -67,10 +67,10 @@ body {
     width: 680px;
     height: 80%;
     text-align: center;
-    /* background-image: url(../img/slogan.png);
+    background-image: url(../img/slogan.svg);
     background-size: 65% 80%;
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: center center;
 }
 
 /* 登录按键 */
