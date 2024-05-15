@@ -10,7 +10,7 @@ body {
 
 /* 头部 */
 header {
-    background-color: palegreen;
+    background-color: #ffffff;
     height: 3.5rem;
     width: 100%;
     max-width: 1260px;
@@ -25,10 +25,10 @@ header {
     top: 50%;
     translate: 0 -50%;
     /* background-color: black; */
-    background-image: url(../img/titan.png);
+    background-image: url(../img/index_logo.png);
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+    background-size: 235% 162%;
+    background-position: 15px -17px;
 }
 
 /* 内容区 */
