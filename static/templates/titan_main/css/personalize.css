@@ -14,3 +14,17 @@ a {
     text-decoration: none;
     color: #000000;
 }
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-clear::after {
+    content: "";
+    display: block;
+    clear:both;
+}

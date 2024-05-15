@@ -1,0 +1,52 @@
+body {
+    /* background-color: #ddf3f9; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* 头部 */
+header {
+    background-color: palegreen;
+    height: 3.5rem;
+    width: 100%;
+    max-width: 1260px;
+    min-width: 755px;
+    position: relative;
+}
+
+.logo-box {
+    width: 200px;
+    height: 3.5rem;
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    /* background-color: black; */
+    background-image: url(../img/titan.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/* 内容区 */
+.content {
+    width: 100%;
+    max-width: 1260px;
+    min-width: 755px;
+    flex: 1;
+}
+
+aside {
+    width: 15%;
+    height: 100%;
+    background-color: skyblue;
+}
+
+.main {
+    width: 85%;
+    height: 100%;
+    background-color: blueviolet;
+}
