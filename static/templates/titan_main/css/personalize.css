@@ -3,6 +3,7 @@ body {
     font-size: 16px;
     line-height: 1.6;
     font-family:"Shentox", "Rogan", sans-serif;
+    color: #0f0f0f;
     margin: 0;
 }
 
@@ -13,4 +14,25 @@ p {
 a {
     text-decoration: none;
     color: #000000;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-clear::after {
+    content: "";
+    display: block;
+    clear:both;
 }

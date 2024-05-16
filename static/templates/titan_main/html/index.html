@@ -1,10 +1,139 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>主页</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titan-主页</title>
+    <link rel="stylesheet" href="../css/personalize.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<h1>你好, {{ request.user.username }}</h1>
-<a href="{% url 'titan_main:logout' %}">注销</a>
+     <header>
+        <div class="logo-box">
+            <div class="logo-btn-box">
+                <button type="button" class="logo-btn">
+
+                </button>
+            </div>
+            <a href="#" title="TITAN首页"></a>
+        </div>
+        <div class="head-right">
+            <div class="avator-box">
+                <img src="../img/default_avator.jpg" alt="用户头像">
+            </div>
+        </div>
+
+     </header>
+     <div class="content float-clear">
+        <aside class="float-left">
+            <!-- 首页 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/home_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    首页
+                </div>
+            </a>
+            <!-- LP商城 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/shop_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    LP商城
+                </div>
+            </a>
+            <!-- LP中心 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/center_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    LP中心
+                </div>
+            </a>
+            <!-- 常用工具 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/tool_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    常用工具
+                </div>
+            </a>
+            <!-- 数据维护 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/data_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    数据维护
+                </div>
+            </a>
+            <!-- 个人信息 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/pr_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    个人信息
+                </div>
+            </a>
+            <!-- 系统设置 -->
+            <a class="home aside-item" href="#">
+                <div class="aside-item-icon">
+                    <img src="../img/setting_icon.svg">
+                </div>
+                <div class="aside-item-title">
+                    系统设置
+                </div>
+            </a>
+        </aside>
+        <div class="main float-left">
+            <div class="main-box">
+                <div class="mian-title">
+                    首页<span>仪表盘</span>
+                </div>
+                <div class="index-left-list">
+                    <div class="index-left-list-item index-left-list-1">
+                        <img src="" alt="">
+                        <div class="item-info">
+                            <!-- isk、PAP LP、skill -->
+                            <span>ISK</span>
+                            <span class="isk">999 999</span>
+                        </div>
+                    </div>
+                    <div class="index-left-list-item index-left-list-2">
+                        <img src="" alt="">
+                        <div class="item-info">
+                            <!-- isk、PAP LP、skill -->
+                            <span>PAP</span>
+                            <span class="pap">999 999</span>
+                        </div>
+                    </div>
+                    <div class="index-left-list-item index-left-list-3">
+                        <img src="" alt="">
+                        <div class="item-info">
+                            <!-- isk、PAP LP、skill -->
+                            <span>LP</span>
+                            <span class="lp">999 999</span>
+                        </div>
+                    </div>
+                    <div class="index-left-list-item index-left-list-4">
+                        <img src="" alt="">
+                        <div class="item-info">
+                            <!-- isk、PAP LP、skill -->
+                            <span>Skill</span>
+                            <span class="skill">999 999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
 </body>
 </html>

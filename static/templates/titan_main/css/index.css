@@ -1,0 +1,254 @@
+body {
+    /* background-color: #ddf3f9; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* 头部 */
+header {
+    background-color: #ffffff;
+    height: 56px;
+    width: 100%;
+    max-width: 1260px;
+    min-width: 755px;
+    position: relative;
+}
+
+.logo-box {
+    width: 200px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    /* background-color: black; */
+    background-image: url(../img/index_logo.png);
+    background-repeat: no-repeat;
+    background-size: 235% 162%;
+    background-position: 41px -20px;
+}
+
+.logo-btn-box {
+    position: relative;
+    height: 56px;
+    width: 56px;
+    /* background-color: antiquewhite; */
+}
+
+.logo-btn {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    background-image: url(../img/logo_btn.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+
+.logo-btn:hover {
+    background-color: #e5e5e5;
+    border-radius: 20px;
+}
+
+.logo-btn:active {
+    background-color: #cecece;
+}
+
+
+.logo-box a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 56px;
+    height: 56px;
+    width: 144px;
+    /* background-color: paleturquoise; */
+}
+
+.head-right {
+    /* background-color: #000; */
+    height: 40px;
+    width: 60px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.avator-box {
+    height: 32px;
+    width: 32px;
+    /* background-color: aliceblue; */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.avator-box img {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    /* border: 1px solid skyblue; */
+}
+
+.avator-box img:active {
+    border: 1px solid rgb(22, 180, 243);
+}
+
+/* 内容区 */
+.content {
+    width: 100%;
+    max-width: 1260px;  
+    min-width: 755px;
+    flex: 1;
+}
+
+/* 侧边栏 */
+aside {
+    width: 15%;
+    height: 100%;
+    background-color: #262d32;
+    padding-top: 10px;
+    box-sizing: border-box;
+    /* padding: 0 20px; */
+}
+
+.aside-item {
+    background-color: #262d32;
+    height: 40px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+.aside-item:hover {
+    background-color: #78acff;
+
+}
+
+.aside-item:active {
+    background-color: #4185f4;
+}
+
+
+.aside-item-icon {
+    height: 40px;
+    width: 35%;
+    /* background-color: antiquewhite; */
+}
+
+.aside-item-icon img {
+    width: 24px;
+    height: 24px;
+    margin: 8px 16px;
+}
+
+.aside-item-title {
+    height: 40px;
+    width: 55%;
+    line-height: 40px;
+    color: #eeefef;
+    font-size: 14px;
+    /* background-color: aquamarine; */
+}
+
+
+/* 主体 */
+.main {
+    width: 85%;
+    height: 100%;
+    background-color: #edf0f5;
+    position: relative;
+}
+
+.main-box {
+    /* background-color: paleturquoise; */
+    width: 98.5%;
+    height: 99%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+}
+
+.mian-title {
+    /* background-color: orange; */
+    height: 36px;
+    width: 100%;
+    vertical-align: bottom;
+    font-weight: 500;
+}
+
+.mian-title span {
+    color: #7e7e7e;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+.index-left-list {
+    /* background-color: #78acff; */
+    width: 49%;
+    height: 350px;
+}
+
+.index-left-list-item {
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.index-left-list-item img {
+    height: 80px;
+    width: 80px;
+    background-color: #fff;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    height: 76px;
+    width: 320px;
+    background-color: #fff;
+}
+
+.item-info span {
+    font-size: 12px;
+    color: #4d4d4d;
+    margin-left: 10px;
+}
+
+.item-info span.isk {
+    font-weight: bold;
+}
+
+.item-info span.pap {
+    font-weight: bold;
+}
+
+.item-info span.skill {
+    font-weight: bold;
+}
+
+.item-info span.lp {
+    font-weight: bold;
+}
