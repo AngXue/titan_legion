@@ -1,4 +1,4 @@
-{#{% load static %}#}
+<!-- {#{% load static %}#} -->
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/personalize.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#}
-{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">#}
-{#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#}
+<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#} -->
+<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">#} -->
+<!-- {#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#} -->
 </head>
 <body>
      <header>
@@ -26,9 +26,13 @@
             <a href="#" title="TITAN首页"></a>
         </div>
         <div class="head-right">
-            <div class="avator-box">
-                <img src="../img/default_avator.jpg" alt="用户头像">
+            <div class="avator-box" id="userAvatar">
+                <div class="img"></div>
             </div>
+        </div>
+        <!-- 头像菜单栏 -->
+        <div id="userMenu">
+            <a href="localhost:8000/accounts/logout/">退出账号</a>
         </div>
 
      </header>
@@ -37,7 +41,8 @@
             <!-- 首页 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/home_icon.svg">
+                    <!-- <img src="../img/home_icon.svg"> -->
+                    <div class="img" id="img001"></div>
                 </div>
                 <div class="aside-item-title">
                     首页
@@ -46,7 +51,8 @@
             <!-- LP商城 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/shop_icon.svg">
+                    <!-- <img src="../img/shop_icon.svg"> -->
+                    <div class="img" id="img002"></div>
                 </div>
                 <div class="aside-item-title">
                     LP商城
@@ -55,7 +61,8 @@
             <!-- LP中心 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/center_icon.svg">
+                    <!-- <img src="../img/center_icon.svg"> -->
+                    <div class="img" id="img003"></div>
                 </div>
                 <div class="aside-item-title">
                     LP中心
@@ -64,7 +71,8 @@
             <!-- 常用工具 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/tool_icon.svg">
+                    <!-- <img src="../img/tool_icon.svg"> -->
+                    <div class="img" id="img004"></div>
                 </div>
                 <div class="aside-item-title">
                     常用工具
@@ -73,7 +81,8 @@
             <!-- 数据维护 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/data_icon.svg">
+                    <div class="img" id="img005"></div>
+                    <!-- <img src="../img/data_icon.svg"> -->
                 </div>
                 <div class="aside-item-title">
                     数据维护
@@ -82,7 +91,8 @@
             <!-- 个人信息 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/pr_icon.svg">
+                    <div class="img" id="img006"></div>
+                    <!-- <img src="../img/pr_icon.svg"> -->
                 </div>
                 <div class="aside-item-title">
                     个人信息
@@ -91,7 +101,8 @@
             <!-- 系统设置 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
-                    <img src="../img/setting_icon.svg">
+                    <div class="img" id="img007"></div>
+                    <!-- <img src="../img/setting_icon.svg"> -->
                 </div>
                 <div class="aside-item-title">
                     系统设置
@@ -105,40 +116,41 @@
                 </div>
                 <div class="index-left-list">
                     <div class="index-left-list-item index-left-list-1">
-                        <img src="" alt="">
+                        <div class="img-box"></div>
                         <div class="item-info">
-                            <!-- isk、PAP LP、skill -->
+                            <!-- isk -->
                             <span>ISK</span>
-                            <span class="isk">999 999</span>
+                            <span class="isk" id="isk"></span>
                         </div>
                     </div>
                     <div class="index-left-list-item index-left-list-2">
-                        <img src="" alt="">
+                        <div class="img-box"></div>
                         <div class="item-info">
-                            <!-- isk、PAP LP、skill -->
+                            <!-- PAP -->
                             <span>PAP</span>
-                            <span class="pap">999 999</span>
+                            <span class="pap" id="pap"></span>
                         </div>
                     </div>
                     <div class="index-left-list-item index-left-list-3">
-                        <img src="" alt="">
+                        <div class="img-box"></div>
                         <div class="item-info">
-                            <!-- isk、PAP LP、skill -->
+                            <!-- LP-->
                             <span>LP</span>
-                            <span class="lp">999 999</span>
+                            <span class="lp" id="lp"></span>
                         </div>
                     </div>
                     <div class="index-left-list-item index-left-list-4">
-                        <img src="" alt="">
+                        <div class="img-box"></div>
                         <div class="item-info">
-                            <!-- isk、PAP LP、skill -->
+                            <!--skill -->
                             <span>Skill</span>
-                            <span class="skill">999 999</span>
+                            <span class="skill" id="skill"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
      </div>
+     <script src="../js/index.js"></script>
 </body>
 </html>
