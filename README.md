@@ -114,6 +114,7 @@
 ### 用户 `profile`
 
 - `id` 用户ID `int` （`pk`）
+- `character_id` 角色ID `int` （唯一值）
 - `nickname` 昵称 `str` （用户自定义）
 - `pap` 联盟贡献度 `float` （直接来自联盟接口）
 - `isk` 游戏角色金额 `float` （直接来自游戏角色属性）

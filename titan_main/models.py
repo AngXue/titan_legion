@@ -1,10 +1,11 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=100)
+    character_id = models.BigIntegerField(default=0)
     pap = models.FloatField(default=0.0)
     isk = models.FloatField(default=0.0)
     skill = models.FloatField(default=0.0)

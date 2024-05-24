@@ -1,7 +1,8 @@
-from .esi import eve_auth_view
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+
 from . import views
+from .esi import eve_auth_view
 
 app_name = 'titan_main'
 

@@ -1,41 +1,42 @@
-from esi.decorators import token_required
+import logging
+
+from django.shortcuts import redirect
 from esi.clients import EsiClientProvider
 from esi.models import Token
-from django.shortcuts import render, redirect
-from .scopes import SCOPES_LIST
 
+logging = logging.getLogger(__name__)
 esi = EsiClientProvider(app_info_text="titan-legion-management-system v0.0.1")
 
 
 def eve_auth_view(request):
+    logging.debug(
+        "EVE Auth request from %s",
+        request.user,
+    )
     return redirect('social:begin', 'eveonline')
 
 
-@token_required(scopes=SCOPES_LIST)
-def get_eve_isk(request, token):
-    character_id = token.character_id
-    required_scopes = ['esi-skills.read_skillqueue.v1']
+def get_eve_isk(character_id):
+    required_scopes = ['esi-wallet.read_character_wallet.v1']
 
     token = Token.get_token(character_id, required_scopes)
 
-    notifications = esi.client.Skills.get_characters_character_id_skillqueue(
+    notifications = esi.client.Wallet.get_characters_character_id_wallet(
         character_id=character_id,
         token=token.valid_access_token()
     ).result()
 
-    return notifications, request
+    return notifications
 
 
-@token_required(scopes=SCOPES_LIST)
-def get_eve_skill(request, token):
-    character_id = token.character_id
-    required_scopes = ['esi-skills.read_skillqueue.v1']
+def get_eve_skill(character_id):
+    required_scopes = ['esi-skills.read_skills.v1']
 
     token = Token.get_token(character_id, required_scopes)
 
-    notifications = esi.client.Skills.get_characters_character_id_skillqueue(
+    notifications = esi.client.Skills.get_characters_character_id_skills(
         character_id=character_id,
         token=token.valid_access_token()
     ).result()
 
-    return notifications, request
+    return notifications
