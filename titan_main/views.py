@@ -29,6 +29,11 @@ def logout_view(request):
     return redirect('titan_main:home')
 
 
+@login_required
+def get_current_user(request):
+    return JsonResponse({'user': request.user})
+
+
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
