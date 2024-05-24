@@ -53,7 +53,8 @@ def logout_view(request):
 def get_current_user(request):
     profile = Profile.objects.get(user=request.user)
     serializer = ProfileSerializer(profile)
-    return JsonResponse(serializer.data)
+    profile = serializer.data
+    return JsonResponse({'profile': profile})
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

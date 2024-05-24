@@ -7,8 +7,7 @@
 - `登录页面`
   ![ui_example_01.png](readme_images/ui_example_01.png)
 
-> 登录操作采用SSO单点登录，登录成功后会自动跳转到用户默认首页，因此前端只需放置一个包含超链接（localhost:
-> 8000/social-auth/login/eveonline/）的登录按钮即可。
+> 登录操作采用SSO单点登录，登录成功后会自动跳转到用户默认首页，因此前端只需放置一个包含超链接的登录按钮即可。
 
 - `用户默认首页`
   ![ui_example_02.png](readme_images/ui_example_02.png)
@@ -17,7 +16,7 @@
 > 用户默认首页包含了用户的基本信息（用户名、PAP、isk、LP、skill），以及用户的权限信息，根据用户的权限信息，显示不同的功能模块。
 > 普通用户可以看到的功能模块有：LP商城、我的LP、补损提交、订单管理。
 > 管理员可以看到的功能模块有：发放LP、商品管理、订单管理、发放记录、军团成员、补损审批。
-> 注销链接（localhost:8000/accounts/logout/）
+> 注销链接（localhost:8000/logout/）
 
 - `LP商城页面`
   ![ui_example_03.png](readme_images/ui_example_03.png)
