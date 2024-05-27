@@ -167,7 +167,7 @@
     - `/get_current_user/` `GET`
     - 权限：普通用户、管理员
     - 输入：无
-    - 输出：`profile`
+    - 输出：{`username`, `profile`}
 - 获取全部用户信息
     - `/api/profiles/` `GET`
     - 权限：普通用户、管理员

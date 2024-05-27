@@ -40,3 +40,8 @@ def get_eve_skill(character_id):
     ).result()
 
     return notifications
+
+
+def get_eve_killrecords(character_id):
+    # TODO: 获取角色被击杀记录
+    return character_id

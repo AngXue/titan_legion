@@ -6,15 +6,37 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from esi.decorators import token_required
 from rest_framework import viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .esi import get_eve_skill, get_eve_isk
 from .models import Profile, Item, Order, Apply
+from .paps import get_legion_pap
 from .scopes import SCOPES_LIST
 from .serializers import ProfileSerializer, ItemSerializer, OrderSerializer, ApplySerializer
 
 logging = logging.getLogger(__name__)
+
+
+def update_profile_isk_pap_skill(user, character_id):
+    try:
+        profile = Profile.objects.get(user=user)
+
+        isk = float(get_eve_isk(character_id))
+        pap = float(get_legion_pap(user.username))
+        skill = float(get_eve_skill(character_id)['total_sp'])
+
+        profile.isk = isk
+        profile.skill = skill
+        profile.pap = pap
+        profile.character_id = character_id
+        profile.save()
+    except Exception as e:
+        logging.debug(
+            "Update user:%s isk, pap, skill error!\n%s",
+            user.username, str(e)
+        )
+        return False
+    return True
 
 
 def is_authenticated_view(request):
@@ -31,15 +53,7 @@ def login_view(request):
 @token_required(scopes=SCOPES_LIST)
 def home_view(request, token):
     character_id = token.character_id
-    isk = float(get_eve_isk(character_id))
-    skill = float(get_eve_skill(character_id)['total_sp'])
-
-    profile = Profile.objects.get(user=request.user)
-    profile.isk = isk
-    profile.skill = skill
-    profile.character_id = character_id
-    profile.save()
-
+    update_profile_isk_pap_skill(request.user, character_id)
     return render(request, 'titan_main/html/index.html')
 
 
@@ -54,7 +68,13 @@ def get_current_user(request):
     profile = Profile.objects.get(user=request.user)
     serializer = ProfileSerializer(profile)
     profile = serializer.data
-    return JsonResponse({'profile': profile})
+    return JsonResponse({'username': request.user.username, 'profile': profile})
+
+
+@login_required
+def upload_item_image(request):
+    # TODO: 上传商品图片到媒体目录
+    pass
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -62,35 +82,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     lookup_field = 'id'
 
-    @action(detail=True, methods=['post'])
-    def update_isk_and_skill(self, request, pk=None):
-        logging.debug(
-            "Update isk and skill request from %s, pk=%s",
-            request.user,
-            pk
-        )
-        profile = self.get_object()
-
-        try:
-            # 使用装饰器来获取并更新数据
-            def update():
-                character_id = profile.character_id
-                notifications = get_eve_skill(character_id)
-                profile.skill = float(notifications['total_sp'])
-                isk = get_eve_isk(character_id)
-                profile.isk = float(isk)
-                profile.save()
-                return Response({'status': 'isk and skill updated'})
-
-            # 调用内部函数以更新数据
-            return update()
-
-        except Exception as e:
-            return Response({'status': 'failed', 'reason': str(e)})
-
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        self.update_isk_and_skill(request, pk=instance.pk)
+        update_profile_isk_pap_skill(request.user, instance.character_id)
         instance.refresh_from_db()  # 刷新对象以获取最新的数据库状态
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
@@ -98,7 +92,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         for profile in queryset:
-            self.update_isk_and_skill(request, pk=profile.pk)
+            update_profile_isk_pap_skill(request.user, profile.character_id)
         queryset = self.get_queryset()  # 重新获取更新后的数据
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
