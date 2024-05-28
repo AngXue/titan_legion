@@ -161,6 +161,15 @@
 
 ## 接口设计（测试前缀`localhost:8000`）
 
+### 上传图片
+- 上传图片
+    - `/upload_image/` `POST`
+    - 权限：管理员
+    - 输入：`file`（图片文件，png/jepg）
+    - 输出：`url`（图片链接）
+    - 输出：{'error': 'Invalid form'}
+    - 输出：{'error': 'Invalid request method'}
+
 ### 用户模块
 
 - 获取当前用户信息

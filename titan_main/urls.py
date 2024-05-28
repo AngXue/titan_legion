@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
@@ -20,6 +22,7 @@ urlpatterns = [
     path('is_authenticated/', views.is_authenticated_view, name='is_authenticated'),
     path('get_token_view/', views.get_token_view, name='get_token_view'),
     path('get_current_user/', views.get_current_user, name='get_current_user'),
+    path('upload_image/', views.upload_image, name='upload_image'),
     path('eve_auth/', eve_auth_view, name='eve_auth'),
     path('api/', include(router.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

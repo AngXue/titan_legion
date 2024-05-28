@@ -1,14 +1,17 @@
 import logging
 
+from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from esi.decorators import token_required
 from rest_framework import viewsets
 from rest_framework.response import Response
 
 from .esi import get_eve_skill, get_eve_isk
+from .forms import ImageUploadForm
 from .models import Profile, Item, Order, Apply
 from .paps import get_legion_pap
 from .scopes import SCOPES_LIST
@@ -49,7 +52,6 @@ def login_view(request):
     return render(request, 'titan_main/html/login.html')
 
 
-@login_required
 @token_required(scopes=SCOPES_LIST)
 def get_token_view(request, token):
     profile = Profile.objects.get(user=request.user)
@@ -87,10 +89,17 @@ def get_current_user(request):
     return JsonResponse({'username': request.user.username, 'profile': profile})
 
 
-@login_required
-def upload_item_image(request):
-    # TODO: 上传商品图片到媒体目录
-    pass
+@csrf_exempt
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_image = form.save()
+            image_url = request.build_absolute_uri(settings.MEDIA_URL + str(uploaded_image.image))
+            return JsonResponse({'url': image_url})
+        else:
+            return JsonResponse({'error': 'Invalid form'}, status=400)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
