@@ -1,4 +1,5 @@
 import json
+import re
 
 import requests
 
@@ -37,7 +38,6 @@ def generate_url(search_value):
         "length": "50",
         "search[value]": search_value,
         "search[regex]": "false",
-        "_": "1716564270290"
     }
     # 构建完整的 URL
     url = base_url + "?" + "&".join([f"{key}={value}" for key, value in params.items()])
@@ -45,8 +45,29 @@ def generate_url(search_value):
 
 
 def get_pap(parsed_response):
-    # TODO: 提取pap
-    return parsed_response
+    extracted_data = []
+
+    # 检查data是否为空
+    if 'data' in parsed_response:
+        # 遍历每个项目
+        for item in parsed_response['data']:
+            # 提取 username 和 pap_count
+            character = item.get('character', '')
+            pap_count = item.get('pap_count', '')
+
+            # 提取用户名
+            match = re.search(r'/> (.+?)\n', character)
+            if match:
+                username = match.group(1)
+            else:
+                username = ''
+
+            # 添加提取的数据到列表中
+            extracted_data.append({'username': username, 'pap_count': pap_count})
+
+    if not extracted_data:
+        return 0
+    return extracted_data[0]['pap_count']
 
 
 def get_legion_pap(username, headers=None, cookies=None):
@@ -78,7 +99,3 @@ def get_legion_pap(username, headers=None, cookies=None):
     pap = get_pap(parsed_response)
 
     return pap
-
-
-# 打印解析后的内容
-print(get_legion_pap("shell"))

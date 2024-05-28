@@ -1,3 +1,5 @@
+{#{% load static %} #}
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -10,6 +12,10 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/lpshop.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}"> #}
+{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}"> #}
+{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/lpshop.css' %}"> #}
+{#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#}
 </head>
 <body>
     <header>
@@ -28,7 +34,7 @@
         </div>
         <!-- 头像菜单栏 -->
         <div id="userMenu">
-            <a href="localhost:8000/accounts/logout/">退出账号</a>
+            <a href="{% url 'titan_main:logout' %}">退出账号</a>
         </div>
      </header>
 
@@ -36,6 +42,7 @@
         <aside class="float-left">
             <!-- 首页 -->
             <a class="home aside-item" href="./index.html">
+{#            <a class="home aside-item" href="{% url 'titan_main:home' %}">#}
                 <div class="aside-item-icon">
                     <!-- <img src="../img/home_icon.svg"> -->
                     <div class="img" id="img001"></div>
@@ -203,5 +210,6 @@
         </div>
      </div>
      <script src="../js/lpshop.js"></script>
+{#    <script src="{% static 'templates/titan_main/js/lpshop.js' %}"></script>#}
 </body>
 </html>

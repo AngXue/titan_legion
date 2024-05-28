@@ -51,10 +51,26 @@ def login_view(request):
 
 @login_required
 @token_required(scopes=SCOPES_LIST)
-def home_view(request, token):
-    character_id = token.character_id
-    update_profile_isk_pap_skill(request.user, character_id)
+def get_token_view(request, token):
+    profile = Profile.objects.get(user=request.user)
+    profile.character_id = token.character_id
+    profile.save()
+    return redirect('titan_main:home')
+
+
+@login_required
+def home_view(request):
+    profile = Profile.objects.get(user=request.user)
+    if profile.character_id == 0:
+        # 第一次登录，获取token和character_id
+        return redirect('titan_main:get_token_view')
+    update_profile_isk_pap_skill(request.user, profile.character_id)
     return render(request, 'titan_main/html/index.html')
+
+
+@login_required
+def lpshop_view(request):
+    return render(request, 'titan_main/html/lpshop.html')
 
 
 @login_required
