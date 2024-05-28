@@ -164,13 +164,11 @@
     margin: 17px auto;
 }
 
-#itemName {
-    /* margin: 20px 0; */
-}
 
 #itemDescription {
     display: block;
     margin: 0 auto;
+    width: 212px;
 }
 
 #img-add-info {
