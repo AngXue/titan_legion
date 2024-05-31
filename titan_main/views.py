@@ -5,7 +5,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
 from esi.decorators import token_required
 from rest_framework import viewsets
 from rest_framework.response import Response
