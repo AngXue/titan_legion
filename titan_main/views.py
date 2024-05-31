@@ -89,7 +89,6 @@ def get_current_user(request):
     return JsonResponse({'username': request.user.username, 'profile': profile})
 
 
-@csrf_exempt
 def upload_image(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)

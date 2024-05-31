@@ -1,4 +1,4 @@
-<!-- {#{% load static %} #} -->
+{% load static %}  
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,14 +8,14 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titan-LP商城</title>
-    <link rel="stylesheet" href="../css/personalize.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/lpshop.css">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}"> #} -->
-<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}"> #} -->
-<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/lpshop.css' %}"> #} -->
-<!-- {#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#} -->
+{#    <link rel="stylesheet" href="../css/personalize.css">#}
+{#    <link rel="stylesheet" href="../css/index.css">#}
+{#    <link rel="stylesheet" href="../css/lpshop.css">#}
+{#    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">#}
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}"> 
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}"> 
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/lpshop.css' %}"> 
+    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -41,8 +41,8 @@
      <div class="content float-clear">
         <aside class="float-left">
             <!-- 首页 -->
-            <a class="home aside-item" href="./index.html">
-<!-- {#            <a class="home aside-item" href="{% url 'titan_main:home' %}">#} -->
+{#            <a class="home aside-item" href="./index.html">#}
+            <a class="home aside-item" href="{% url 'titan_main:home' %}">
                 <div class="aside-item-icon">
                     <div class="img" id="img001"></div>
                 </div>
@@ -190,6 +190,7 @@
                 </div>
                 <!-- 添加商品表单 -->
                 <form id="addItemForm" method="post">
+                    {% csrf_token %}
                     <input type="text" id="itemName" name="itemName" placeholder="商品名称" maxlength="10" required>
                     <textarea name="itemDescription" id="itemDescription" cols="25" rows="5" placeholder="商品描述" maxlength="48" required></textarea>
                     <input type="number" id="itemPrice" name="itemPrice" placeholder="商品价格[0~999]">
@@ -202,7 +203,7 @@
             </div>
         </div>
      </div>
-     <script src="../js/lpshop.js"></script>
-<!-- {#    <script src="{% static 'templates/titan_main/js/lpshop.js' %}"></script>#} -->
+{#     <script src="../js/lpshop.js"></script>#}
+    <script src="{% static 'templates/titan_main/js/lpshop.js' %}"></script>
 </body>
 </html>

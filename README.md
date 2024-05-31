@@ -210,24 +210,24 @@
 ### 商品模块
 
 - 获取全部商品信息
-  - `/api/item/` `GET`
+  - `/api/items/` `GET`
   - 权限：普通用户、管理员
   - 输入：无
   - 输出：List(`item`)
   - 输出：{`message`: }
 - 增加一个商品信息
-  - `/api/item/` `POST`
+  - `/api/items/` `POST`
   - 权限：管理员
   - 输入：`item` {`item_name`, `item_price`(浮点型字符串，范围[0, 999]), `item_description`, `item_image`}
   - 输出：`item`
   - 输出：{`message`: }
 - 删除指定商品信息
-  - `/api/item/<pk>/` `DELETE`
+  - `/api/items/<pk>/` `DELETE`
   - 权限：管理员
   - 输入：无
   - 输出：{`message`: }
 - 修改指定商品信息
-  - `/api/item/<pk>/` `PUT`
+  - `/api/items/<pk>/` `PUT`
   - 权限：管理员
   - 输入：`item` （必须包含`item_name`）
   - 输出：`item`
@@ -236,21 +236,21 @@
 ### 订单模块
 
 - 获取指定用户订单信息
-    - `/api/order/get_user_order_info/` `GET`
+    - `/api/orders/get_user_order_info/` `GET`
     - 权限：普通用户、管理员
     - 输入：`username`
     - 输出：`result`: true, `message`: "
       获取成功", `data`{`order`{`order_id`, `order_time`, `order_status`, `lp_cost`, `item_name`, `item_price`, `item_quantity`, `nickname`, `username`}, ...}
     - 输出：`result`: false, `message`: "获取失败", `data`: {}
 - 获取全部订单信息
-    - `/api/order/get_all_order_info/` `GET`
+    - `/api/orders/get_all_order_info/` `GET`
     - 权限：管理员
     - 输入：无
     - 输出：`result`: true, `message`: "
       获取成功", `data`{`order`{`order_id`, `order_time`, `order_status`, `lp_cost`, `item_name`, `item_price`, `item_quantity`, `nickname`, `username`}, ...}
     - 输出：`result`: false, `message`: "获取失败", `data`: {}
 - 新建订单
-    - `/api/order/add_order/` `POST`
+    - `/api/orders/add_order/` `POST`
     - 权限：普通用户，管理员
     - 输入：`username`, `lp_cost`(浮点型字符串，范围[0, 999]，且不得超过用户当前`lp`), `item_name`, `item_quantity`(
       整型字符串，范围[1, 999])
@@ -259,7 +259,7 @@
       （新建订单后，在后端更新用户`lp`和`used_lp`）
     - 输出：`result`: false, `message`: "添加失败", `data`: {}
 - 修改订单状态
-    - `/api/order/update_order_status/` `POST`
+    - `/api/orders/update_order_status/` `POST`
     - 权限：管理员
     - 输入：{`order`{`order_id`, `order_status`(通过：`true`，拒绝：`false`，待审批：`none`)}, ...}
     - 输出：`result`: true, `message`: "修改成功", `data`: {`order`{`order_id`, `order_status`}, ...}
@@ -268,28 +268,28 @@
 ### 补损模块
 
 - 获取指定用户击杀记录
-- `/api/apply/get_user_kill_record/` `GET`
+- `/api/applies/get_user_kill_record/` `GET`
     - 权限：普通用户、管理员
     - 输入：`username`
     - 输出：`result`: true, `message`: "
       获取成功", `data`{`kill_record`{`kill_kmid`, `kill_time`, `kill_ship`, `kill_value`, `kill_location`}, ...}
     - 输出：`result`: false, `message`: "获取失败", `data`: {}
 - 获取指定用户补损申请信息
-    - `/api/apply/get_user_apply_info/` `GET`
+    - `/api/applies/get_user_apply_info/` `GET`
     - 权限：普通用户、管理员
     - 输入：`username`
     - 输出：`result`: true, `message`: "
       获取成功", `data`{`apply`{`apply_id`, `apply_time`, `apply_status`, `nickname`, `username`, `kill_record`, `apply_description`}, ...}
     - 输出：`result`: false, `message`: "获取失败", `data`: {}
 - 获取全部补损申请信息
-    - `/api/apply/get_all_apply_info/` `GET`
+    - `/api/applies/get_all_apply_info/` `GET`
     - 权限：管理员
     - 输入：无
     - 输出：`result`: true, `message`: "
       获取成功", `data`{`apply`{`apply_id`, `apply_time`, `apply_status`, `nickname`, `username`, `kill_record`, `apply_description`}, ...}
     - 输出：`result`: false, `message`: "获取失败", `data`: {}
 - 新建补损申请
-    - `/api/apply/add_apply/` `POST`
+    - `/api/applies/add_apply/` `POST`
     - 权限：普通用户，管理员
     -
     输入：`username`, `kill_record`{`kill_kmid`, `kill_time`, `kill_ship`, `kill_value`, `kill_location`}, `apply_description`
@@ -297,7 +297,7 @@
       none, `nickname`, `username`, `kill_record`, `apply_description`}}
     - 输出：`result`: false, `message`: "添加失败，已经申请过此损失", `data`: {}
 - 修改补损申请状态
-    - `/api/apply/update_apply_status/` `POST`
+    - `/api/applies/update_apply_status/` `POST`
     - 权限：管理员
     - 输入：{`apply`{`apply_id`, `apply_status`(通过：`true`，拒绝：`false`，待审批：`none`)}, ...}
     - 输出：`result`: true, `message`: "修改成功", `data`: {`apply`{`apply_id`, `apply_status`}, ...}

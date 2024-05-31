@@ -40,6 +40,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// 获取CSRF令牌
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // 检查这个cookie字符串是否以我们想要的名字开头
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+
 document.getElementById('addItemForm').addEventListener('submit', function(event) {
     event.preventDefault(); // 阻止表单的默认提交行为
 
@@ -61,11 +81,14 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
 
     // 上传图片
     var uploadData = new FormData();
-    uploadData.append('file', file);
+    uploadData.append('image', file);
 
     fetch('/upload_image/', {
         method: 'POST',
-        body: uploadData
+        body: uploadData,
+        headers: {
+            'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
+        },
     })
     .then(response => response.json())
     .then(data => {
@@ -82,10 +105,11 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
             item_image: imageUrl // 使用返回的图片URL
         };
 
-        return fetch('/api/item/', {
+        return fetch('/api/items/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
             },
             body: JSON.stringify(itemData)
         });
