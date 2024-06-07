@@ -220,7 +220,7 @@
   - 权限：管理员
   - 输入：`item` {`item_name`, `item_price`(浮点型字符串，范围[0, 999]), `item_description`, `item_image`}
   - 输出：`item`
-  - 输出：{`message`: }
+  - 输出：{"item_price": ["`item_price`: 超出范围[0, 999]！"]}
 - 删除指定商品信息
   - `/api/items/<pk>/` `DELETE`
   - 权限：管理员
@@ -258,6 +258,8 @@
       none, `lp_cost`, `item_name`,`item_price`,  `item_quantity`, `nickname`, `username`}, `user`{`lp`, `used_lp`}}
       （新建订单后，在后端更新用户`lp`和`used_lp`）
     - 输出：`result`: false, `message`: "添加失败", `data`: {}
+    - 输出: {"lp_cost": ["`lp_cost`: 超出范围[0, 999]！"]}
+    - 输出: {"item_quantity": ["`item_quantity`: 超出范围[1, 999]！"]}
 - 修改订单状态
     - `/api/orders/update_order_status/` `POST`
     - 权限：管理员
