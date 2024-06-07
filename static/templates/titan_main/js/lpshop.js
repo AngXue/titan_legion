@@ -60,73 +60,153 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 
-document.getElementById('addItemForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // 阻止表单的默认提交行为
+document.addEventListener('DOMContentLoaded', function() {
+    const itemsPerPage = 8;
+    let currentPage = 0;
+    const itemList = document.getElementById('itemList');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let items = [];
 
-    var form = document.getElementById('addItemForm');
-    var fileInput = document.getElementById('itemImage');
-    var file = fileInput.files[0];
-
-    // 验证是否选择了文件
-    if (!file) {
-        alert('请选择要上传的图片');
-        return;
+    // 创建商品项的HTML
+    function createItemHTML(item) {
+        return `
+            <div class="item float-left">
+                <div class="item-img"><img src="${item.image}" alt="${item.name}"></div>
+                <div class="info">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-descri">${item.description}</div>
+                    <div class="item-price">${item.price}</div>
+                </div>
+            </div>
+        `;
     }
 
-    // 验证文件类型
-    if (!file.type.match('image/png') && !file.type.match('image/jpeg')) {
-        alert('只能上传png或jpg格式的图片');
-        return;
+    // 更新页面内容
+    function updateContent() {
+        itemList.innerHTML = '';
+        const start = currentPage * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedItems = items.slice(start, end);
+        paginatedItems.forEach(item => {
+            itemList.innerHTML += createItemHTML(item);
+        });
     }
 
-    // 上传图片
-    var uploadData = new FormData();
-    uploadData.append('image', file);
+    // 更新按钮状态
+    function updateButtons() {
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = (currentPage + 1) * itemsPerPage >= items.length;
+    }
 
-    fetch('/upload_image/', {
-        method: 'POST',
-        body: uploadData,
-        headers: {
-            'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            throw new Error(data.error);
+    // 获取全部商品
+    function fetchItems() {
+        fetch('/api/items/')
+            .then(response => response.json())
+            .then(data => {
+                items = data.items;
+                currentPage = 0; // 重置当前页
+                updateContent();
+                updateButtons();
+            })
+            .catch(error => console.error('Error fetching items:', error));
+    }
+
+    // 初始化页面内容和按钮状态
+    fetchItems();
+
+    // 为按钮添加点击事件处理程序
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            updateContent();
+            updateButtons();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if ((currentPage + 1) * itemsPerPage < items.length) {
+            currentPage++;
+            updateContent();
+            updateButtons();
+        }
+    });
+
+    // 提交添加商品表单
+    document.getElementById('addItemForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 阻止表单的默认提交行为
+
+        const form = document.getElementById('addItemForm');
+        const fileInput = document.getElementById('itemImage');
+        const file = fileInput.files[0];
+
+        // 验证是否选择了文件
+        if (!file) {
+            alert('请选择要上传的图片');
+            return;
         }
 
-        var imageUrl = data.url || data; // 确保正确获取图片URL
-        // 图片上传成功，继续发送商品信息
-        var itemData = {
-            item_name: document.getElementById('itemName').value,
-            item_price: document.getElementById('itemPrice').value,
-            item_description: document.getElementById('itemDescription').value,
-            item_image: imageUrl // 使用返回的图片URL
-        };
+        // 验证文件类型
+        if (!file.type.match('image/png') && !file.type.match('image/jpeg')) {
+            alert('只能上传png或jpg格式的图片');
+            return;
+        }
 
-        return fetch('/api/items/', {
+        // 上传图片
+        const uploadData = new FormData();
+        uploadData.append('image', file);
+
+        fetch('/upload_image/', {
             method: 'POST',
+            body: uploadData,
             headers: {
-                'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
             },
-            body: JSON.stringify(itemData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            const imageUrl = data.url || data; // 确保正确获取图片URL
+            // 图片上传成功，继续发送商品信息
+            const itemData = {
+                item_name: document.getElementById('itemName').value,
+                item_price: document.getElementById('itemPrice').value,
+                item_description: document.getElementById('itemDescription').value,
+                item_image: imageUrl // 使用返回的图片URL
+            };
+
+            return fetch('/api/items/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
+                },
+                body: JSON.stringify(itemData)
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 处理最终的响应结果
+            if (data.message) {
+                alert(data.message);
+            } else {
+                alert('商品添加成功');
+                items.append(data.item);
+                updateContent();
+                updateButtons();
+            }
+        })
+        .catch(error => {
+            console.error('错误:', error);
+            alert('发生错误: ' + error.message);
         });
-    })
-    .then(response => response.json())
-    .then(data => {
-        // 处理最终的响应结果
-        if (data.message) {
-            alert(data.message);
-        } else {
-            alert('商品添加成功');
-        }
-    })
-    .catch(error => {
-        console.error('错误:', error);
-        alert('发生错误: ' + error.message);
     });
 });
+
+
+
 
 
