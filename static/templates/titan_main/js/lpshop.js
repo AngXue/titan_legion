@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function createItemHTML(item) {
         return `
             <div class="item float-left">
-                <div class="item-img"><img src="${item.image}" alt="${item.name}"></div>
+                <div class="item-img"><img src="${item.item_image}" alt="${item.name}"></div>
                 <div class="info">
-                    <div class="item-name">${item.name}</div>
-                    <div class="item-descri">${item.description}</div>
-                    <div class="item-price">${item.price}</div>
+                    <div class="item-name">${item.item_name}</div>
+                    <div class="item-descri">${item.item_description}</div>
+                    <div class="item-price">${item.item_price}</div>
                 </div>
             </div>
         `;
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/api/items/')
             .then(response => response.json())
             .then(data => {
-                items = data.items;
+                items = data;
                 currentPage = 0; // 重置当前页
                 updateContent();
                 updateButtons();
@@ -187,6 +187,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(itemData)
             });
         })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('请求失败');
+            }
+            return response;
+        })
         .then(response => response.json())
         .then(data => {
             // 处理最终的响应结果
@@ -194,7 +200,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.message);
             } else {
                 alert('商品添加成功');
-                items.append(data.item);
+                // 添加data到items数组
+                items.push(data);
                 updateContent();
                 updateButtons();
             }

@@ -42,7 +42,7 @@
 
 /* 商品栏 */
 
-.item .item-img {
+.item .item-img img {
     /* height: 210px;
     width: 220px; */
     height: 168px;
@@ -73,7 +73,6 @@
     line-height: 16px;
     color: #606060;
     overflow: hidden;
-    
 }
 
 .info div.item-price {
