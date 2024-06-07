@@ -43,5 +43,23 @@ def get_eve_skill(character_id):
 
 
 def get_eve_killrecords(character_id):
-    # TODO: 获取角色被击杀记录
-    return character_id
+    required_scopes = ['esi-killmails.read_killmails.v1']
+
+    token = Token.get_token(character_id, required_scopes)
+
+    hash_id = esi.client.Killmails.get_characters_character_id_killmails_recent(
+        character_id=character_id,
+        token=token.valid_access_token()
+    ).result()
+
+    notifications = []
+
+    for killmail in hash_id:
+        tmp = esi.client.Killmails.get_killmails_killmail_id_killmail_hash(
+            killmail_id=killmail['killmail_id'],
+            killmail_hash=killmail['killmail_hash'],
+            token=token.valid_access_token()
+        ).result()
+        notifications.append(tmp)
+
+    return notifications

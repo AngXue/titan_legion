@@ -124,6 +124,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    # TODO: 添加数据约束检验
 
 
 class OrderViewSet(viewsets.ModelViewSet):
