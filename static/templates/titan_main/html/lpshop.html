@@ -111,8 +111,8 @@
                     LP商城<span>商品展示</span>
                 </div>
                 <!-- 商品栏 -->
-                <div class="index-left-list float-clear">
-                    <div class="item item1 float-left">
+                <div class="index-left-list float-clear" id="itemList">
+                    <!-- <div class="item item1 float-left">
                         <div class="item-img"></div>
                         <div class="info">
                             <div class="item-name">我叫名称</div>
@@ -176,23 +176,31 @@
                             <div class="item-price">1000000 lp</div>
                         </div>
                     </div>
+                    <div class="item item9 float-left">
+                        <div class="item-img"></div>
+                        <div class="info">
+                            <div class="item-name">我叫名称</div>
+                            <div class="item-descri">这里是商品描述这里是商这里是商品描述这里是商这里是商品描述这里是商这里是商品描述这里是</div>
+                            <div class="item-price">1000000 lp</div>
+                        </div>
+                    </div> -->
                 </div>
                 <!-- 底部按钮 -->
                 <div class="btn-box">
-                    <button class="pre-page btn">上一页</button>
+                    <button class="pre-page btn" id="prevBtn">上一页</button>
                     <div class="func-btns">
                         <button class="del-btn btn">删除</button>
                         <button class="buy-btn btn">购买</button>
                         <button class="modify-btn btn">修改</button>
                     </div>
                     <button class="add-item btn" id="addItemBtn">添加</button>
-                    <button class="next-page btn">下一页</button>
+                    <button class="next-page btn" id="nextBtn">下一页</button>
                 </div>
                 <!-- 添加商品表单 -->
                 <form id="addItemForm" method="post">
                     {% csrf_token %}
                     <input type="text" id="itemName" name="itemName" placeholder="商品名称" maxlength="10" required>
-                    <textarea name="itemDescription" id="itemDescription" cols="25" rows="5" placeholder="商品描述" maxlength="48" required></textarea>
+                    <textarea name="itemDescription" id="itemDescription" cols="25" rows="5" placeholder="商品描述" maxlength="38" required></textarea>
                     <input type="number" id="itemPrice" name="itemPrice" placeholder="商品价格[0~999]">
                     <label id="img-add-info">
                         上传商品图片(png/jpeg)：
