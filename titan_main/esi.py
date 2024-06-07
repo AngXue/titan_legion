@@ -43,6 +43,7 @@ def get_eve_skill(character_id):
 
 
 def get_eve_killrecords(character_id):
+    # TODO: 待测试
     required_scopes = ['esi-killmails.read_killmails.v1']
 
     token = Token.get_token(character_id, required_scopes)
