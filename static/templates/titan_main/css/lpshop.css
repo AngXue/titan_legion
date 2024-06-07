@@ -154,7 +154,7 @@
     top: 190px;
     translate: -50% 0;
     width: 230px;
-    height: 320px;
+    height: 336px;
     background-color: #dddcdc;
     border-radius: 10px;
     display: none;
@@ -193,7 +193,7 @@
 
 }
 
-#add-smt-btn {
+#addSmtBtn {
     background: #f8f8f8;
     width: 80px;
     height: 30px;
@@ -208,16 +208,16 @@
     translate: -50% 0;
 }
 
-#add-smt-btn:hover {
+#addSmtBtn:hover {
     background-color: #f0f0f0;
 }
 
 
-#add-smt-btn:active {
+#addSmtBtn:active {
     background-color: #e9e9e9;
 }
 
-#push-smt-btn {
+#modifyBtn {
     display: none;
     background: #f8f8f8;
     width: 80px;
@@ -233,12 +233,12 @@
     translate: -50% 0;
 }
 
-#push-smt-btn:hover {
+#modifyBtn:hover {
     background-color: #f0f0f0;
 }
 
 
-#push-smt-btn:active {
+#modifyBtn:active {
     background-color: #e9e9e9;
 }
 

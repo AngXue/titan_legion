@@ -112,54 +112,6 @@
                 </div>
                 <!-- 商品栏 -->
                 <div class="index-left-list float-clear" id="itemList">
-                    
-                    <div class="item item1 float-left" data-id="1">
-                        <img src="../img/default_item.jpg">
-                        <div class="info">
-                            <div class="item-name">我叫名称</div>
-                            <div class="item-descri">这里是商品描述..............这里是商品描述这里是商</div>
-                            <div class="item-price">1000000 lp</div>
-                        </div>
-                    </div>
-                    
-
-
-
-
-
-                    <div class="item item1 float-left">
-                        <img src="../img/default_item.jpg">
-                        <div class="info">
-                            <div class="item-name">我叫名称</div>
-                            <div class="item-descri">这里是商品描述..............这里是商品描述这里是商</div>
-                            <div class="item-price">1000000 lp</div>
-                        </div>
-                    </div>
-                    <div class="item item1 float-left">
-                        <img src="../img/default_item.jpg">
-                        <div class="info">
-                            <div class="item-name">我叫名称</div>
-                            <div class="item-descri">这里是商品描述..............这里是商品描述这里是商</div>
-                            <div class="item-price">1000000 lp</div>
-                        </div>
-                    </div>
-                    <div class="item item1 float-left">
-                        <img src="../img/default_item.jpg">
-                        <div class="info">
-                            <div class="item-name">我叫名称</div>
-                            <div class="item-descri">这里是商品描述..............这里是商品描述这里是商</div>
-                            <div class="item-price">1000000 lp</div>
-                        </div>
-                    </div>
-                    <div class="item item1 float-left">
-                        <img src="../img/default_item.jpg">
-                        <div class="info">
-                            <div class="item-name">我叫名称</div>
-                            <div class="item-descri">这里是商品描述..............这里是商品描述这里是商</div>
-                            <div class="item-price">1000000 lp</div>
-                        </div>
-                    </div>
-                   
                 </div>
                 <!-- 底部按钮 -->
                 <div class="btn-box">
@@ -175,6 +127,7 @@
                 <!-- 添加商品表单 -->
                 <form id="addItemForm" data-action="add" method="post">
                     {% csrf_token %}
+                    <input type="hidden" id="itemId" name="itemId">
                     <input type="text" id="itemName" name="itemName" placeholder="商品名称" maxlength="10" required>
                     <textarea name="itemDescription" id="itemDescription" cols="25" rows="5" placeholder="商品描述" maxlength="38" required></textarea>
                     <input type="number" id="itemPrice" name="itemPrice" placeholder="商品价格[0~999]">
@@ -182,8 +135,8 @@
                         上传商品图片(png/jpeg)：
                         <input type="file" id="itemImage" name="itemImage" accept="image/png, image/jpeg" >
                     </label>
-                    <button type="submit" id="add-smt-btn">添加商品</button>
-                    <button type="submit" id="push-smt-btn">修改商品</button>
+                    <button type="submit" id="addSmtBtn">添加商品</button>
+                    <button type="submit" id="modifyBtn">修改商品</button>
                     <button id="add-close-btn"></button>
                 </form>
             </div>
