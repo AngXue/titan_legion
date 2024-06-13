@@ -29,6 +29,60 @@ document.addEventListener('DOMContentLoaded', function() {
     var addItemForm = document.getElementById('addItemForm');
 
     var closeBtn = document.getElementById('add-close-btn');
+    var selectItem = document.getElementById('LP-center');
+    var hdItemBox1 = document.getElementById('hd-box-1');
+
+    var selectItem2 = document.getElementById('tool');
+    var hdItemBox2 = document.getElementById('hd-box-2');
+
+    var selectItem3 = document.getElementById('data-service');
+    var hdItemBox3 = document.getElementById('hd-box-3');
+    
+    // 绑定点击事件处理函数
+    selectItem3.addEventListener('click', function() {
+       // 切换表单的显示状态
+       if (hdItemBox3.style.display === 'none' || hdItemBox3.style.display === '') {
+           hdItemBox3.style.display = 'block';
+       } else {
+           hdItemBox3.style.display = 'none';
+        }
+        hdItemBox2.style.display = 'none';
+        hdItemBox1.style.display = 'none';
+    });
+
+    //      // 绑定点击事件处理函数
+    //  selectItem2.addEventListener('click', function() {
+    //     // 切换表单的显示状态
+    //     if (hdItemBox2.style.display === 'none' || hdItemBox2.style.display === '') {
+    //         hdItemBox2.style.display = 'block';
+    //     } else {
+    //         hdItemBox2.style.display = 'none';
+    //     }
+    //  });
+
+     // 绑定点击事件处理函数
+     selectItem2.addEventListener('click', function() {
+        // 切换表单的显示状态
+        if (hdItemBox2.style.display === 'none' || hdItemBox2.style.display === '') {
+            hdItemBox2.style.display = 'block';
+        } else {
+            hdItemBox2.style.display = 'none';
+        }
+        hdItemBox1.style.display = 'none';
+        hdItemBox3.style.display = 'none';
+     });
+    
+    // 绑定点击事件处理函数
+    selectItem.addEventListener('click', function() {
+        // 切换表单的显示状态
+        if (hdItemBox1.style.display === 'none' || hdItemBox1.style.display === '') {
+           hdItemBox1.style.display = 'block';
+        } else {
+            hdItemBox1.style.display = 'none';
+        }
+        hdItemBox2.style.display = 'none';
+        hdItemBox3.style.display = 'none';
+    });
 
      // 绑定点击事件处理函数
      closeBtn.addEventListener('click', function() {

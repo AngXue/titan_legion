@@ -204,8 +204,29 @@ aside {
 #img003 {
     background-image: url(../img/center_icon.svg);
 }
+#img00301 {
+    background-image: url(../img/biz-paper-plane.svg);
+}
+#img00302 {
+    background-image: url(../img/biz-chart-line.svg);
+}
+#img00303 {
+    background-image: url(../img/biz-app-group.svg);
+}
+#img00304 {
+    background-image: url(../img/biz-pc.svg);
+}
+#img00305 {
+    background-image: url(../img/biz-global.svg);
+}
 #img004 {
     background-image: url(../img/tool_icon.svg);
+}
+#img00401 {
+    background-image: url(../img/codepen.svg);
+}
+#img00402 {
+    background-image: url(../img/envelope-open-text-solid.svg);
 }
 #img005 {
     background-image: url(../img/data_icon.svg);
@@ -343,3 +364,23 @@ aside {
 .item-info span.lp {
     font-weight: bold;
 }
+/* 隐藏左侧功能栏 */
+
+.hd-1,
+.hd-2 {
+    justify-content: flex-end;
+}
+
+ .content .hd-box {
+    display: none;
+}
+
+.content .hd-box .aside-item .aside-item-title {
+    width: 45%;
+}
+
+
+.content .hd-box .aside-item {
+
+}
+
