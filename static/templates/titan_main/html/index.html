@@ -1,4 +1,4 @@
-{#{% load static %}#}
+<!-- {#{% load static %}#} -->
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/personalize.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-{#     <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#}
-{#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">#}
-{#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#}
+<!-- {#     <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#} -->
+<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">#} -->
+<!-- {#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#} -->
 </head>
 <body>
      <header>
@@ -38,9 +38,9 @@
      </header>
      <div class="content float-clear">
         <aside class="float-left">
-            <!-- 首页 -->
-            <a class="home aside-item" href="./index.html">
-{#            <a class="home aside-item" href="{% url 'titan_main:home' %}">#}
+             <!-- 首页 -->
+             <a class="home aside-item" href="./index.html">
+<!-- {#      <a class="home aside-item" href="{% url 'titan_main:home' %}">#} -->
                 <div class="aside-item-icon">
                     <div class="img" id="img001"></div>
                 </div>
@@ -49,8 +49,7 @@
                 </div>
             </a>
             <!-- LP商城 -->
-            <a class="home aside-item" href="./lpshop.html">
-{#            <a class="home aside-item" href="{% url 'titan_main:lpshop' %}">#}
+            <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
                     <div class="img" id="img002"></div>
                 </div>
@@ -59,32 +58,127 @@
                 </div>
             </a>
             <!-- LP中心 -->
-            <a class="home aside-item" href="#">
+            <div class="home aside-item" id="LP-center">
                 <div class="aside-item-icon">
                     <div class="img" id="img003"></div>
                 </div>
                 <div class="aside-item-title">
                     LP中心
                 </div>
-            </a>
+            </div>
+            <div class="hd-box" id="hd-box-1">
+                <a class="home aside-item hd-1" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00301"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        发放LP
+                    </div>
+                </a>
+                <a class="home aside-item hd-1" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00302"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        我的LP
+                    </div>
+                </a>
+                <a class="home aside-item hd-1" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00303"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        商品管理
+                    </div>
+                </a>
+                <a class="home aside-item hd-1" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00304"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        订单管理
+                    </div>
+                </a>
+                <a class="home aside-item hd-1" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00305"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        发放记录
+                    </div>
+                </a>
+            </div>
+            
             <!-- 常用工具 -->
-            <a class="home aside-item" href="#">
+            <div class="home aside-item" id="tool">
                 <div class="aside-item-icon">
                     <div class="img" id="img004"></div>
                 </div>
                 <div class="aside-item-title">
                     常用工具
                 </div>
-            </a>
+            </div>
+            <div class="hd-box" id="hd-box-2">
+                <a class="home aside-item hd-2" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00401"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        补损提交
+                    </div>
+                </a>
+                <a class="home aside-item hd-2" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00402"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        留言版
+                    </div>
+                </a>
+            </div>
             <!-- 数据维护 -->
-            <a class="home aside-item" href="#">
+            <div class="home aside-item" id="data-service">
                 <div class="aside-item-icon">
                     <div class="img" id="img005"></div>
                 </div>
                 <div class="aside-item-title">
                     数据维护
                 </div>
-            </a>
+            </div>
+            <div class="hd-box" id="hd-box-3">
+                <a class="home aside-item hd-3" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00501"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        军团成员
+                    </div>
+                </a>
+                <a class="home aside-item hd-3" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00502"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        补损规则
+                    </div>
+                </a>
+                <a class="home aside-item hd-3" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00503"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        补损黑名单
+                    </div>
+                </a>
+                <a class="home aside-item hd-3" href="#">
+                    <div class="aside-item-icon">
+                        <div class="img" id="img00504"></div>
+                    </div>
+                    <div class="aside-item-title">
+                        补损审批
+                    </div>
+                </a>
+            </div>
             <!-- 个人信息 -->
             <a class="home aside-item" href="#">
                 <div class="aside-item-icon">
@@ -146,7 +240,8 @@
             </div>
         </div>
      </div>
+     <script src="../js/lpshop.js"></script>
      <script src="../js/index.js"></script>
-{#     <script src="{% static 'templates/titan_main/js/index.js' %}"></script>#}
+<!-- {#     <script src="{% static 'templates/titan_main/js/index.js' %}"></scrip>#} -->
 </body>
 </html>

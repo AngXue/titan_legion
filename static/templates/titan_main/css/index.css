@@ -231,6 +231,19 @@ aside {
 #img005 {
     background-image: url(../img/data_icon.svg);
 }
+#img00501 {
+    background-image: url(../img/users-solid.svg);
+}
+#img00502 {
+    background-image: url(../img/file-circle-check-solid.svg);
+}
+#img00503 {
+    background-image: url(../img/person-circle-exclamation-solid.svg);
+}
+#img00504 {
+    background-image: url(../img/pen-to-square-solid.svg);
+}
+
 #img006 {
     background-image: url(../img/pr_icon.svg);
 }
@@ -367,7 +380,8 @@ aside {
 /* 隐藏左侧功能栏 */
 
 .hd-1,
-.hd-2 {
+.hd-2,
+.hd-3 {
     justify-content: flex-end;
 }
 
@@ -380,7 +394,4 @@ aside {
 }
 
 
-.content .hd-box .aside-item {
-
-}
 
