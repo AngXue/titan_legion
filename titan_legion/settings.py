@@ -28,8 +28,16 @@ INSTALLED_APPS = [
     'social_django',
     'esi',
     'rest_framework',
+    'drf_spectacular',
     'titan_main',
 ]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TITAN LEGION API',
+    'DESCRIPTION': 'TITAN LEGION 的API文档',
+    'VERSION': '0.1.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -40,6 +48,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 AUTHENTICATION_BACKENDS = [
