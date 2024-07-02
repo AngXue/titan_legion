@@ -121,7 +121,7 @@
 - `lp` 军团贡献度 `float` （用户剩余的LP总数，初始为`0`，可小于`0`）
 - `used_lp` 已使用的LP总数 `float` （初始为`0`，不可小于`0`）
 - `role` 用户角色 `str` （普通用户：`0`，管理员：`1`，储存在表`auth_user`中，名为`is_staff`）
-- `user` 关联表`auth_user`的`user`的`id` `int` （外键）
+- `user_id` 关联表`auth_user`的`user`的`id` `int` （外键）
 
 ### 商品 `item`
 
