@@ -1,0 +1,143 @@
+.main-box {
+    overflow-y: auto;
+    /* position: relative; */
+}
+
+.lpcenter1-table-box {
+    background-color: #fff;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.lpcenter1-domian {
+    /* background-color: skyblue; */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 40px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+.lpcenter1-domian-right {
+    /* background-color: antiquewhite; */
+    font-size: 18px;
+    height: 36px;
+    line-height: 36px;
+
+}
+
+.lpcenter1-domian-left {
+    background-color: #4185f4;
+    height: 36px;
+    width: 70px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.lpcenter1-table {
+    border: 1px #edf0f5 solid;
+    /* width: 100%; */
+    margin: 0 auto;
+    width: 98%;
+    border-collapse: collapse;
+}
+
+.lpcenter1-table thead th {
+    border: 1px #edf0f5 solid;
+
+}
+.lpcenter1-table tbody td {
+    border: 1px #edf0f5 solid;
+    text-align: center;
+}
+.lpcenter1-table tbody tr {
+    cursor: pointer;
+}
+
+.lpcenter1-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.lpcenter1-table tbody tr:active {
+    background-color: #e9e9e9;
+}
+.lpcenter1-table-tr.selected {
+    background-color: #e9e9e9;
+
+}
+
+.modify-lp-box {
+    background-color:  rgba(255,255,240,0.6);
+    height: 450px;
+    width: 420px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    /* overflow-y: auto; */
+    padding-top: 10px;
+    padding-bottom: 50px;
+    display: none;
+}
+
+.modify-lp-top-box {
+    height: 434px;
+    overflow-y: auto;
+}
+
+.modify-lp-table {
+    width: 400px;
+    margin: 0 auto;
+    border: 1px #edf0f5 solid;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+
+.modify-lp-table tr {
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.modify-lp-table thead th {
+    border: 1px #edf0f5 solid;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.modify-lp-table tbody td {
+    border: 1px #edf0f5 solid;
+    text-align: center;
+    height: 30px;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.modify-lp-input {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.modify-lp-input:focus{
+    outline: none;
+    /* background-color: #4185f4; */
+}
+
+.modify-lp-btn {
+    background-color: #4185f4;
+    height: 34px;
+    width: 100px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    translate: -50% 0;
+    cursor: pointer;
+    color: #fff;
+}
