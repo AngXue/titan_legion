@@ -192,12 +192,12 @@
 - 修改用户属性
     - `/api/profiles/<pk>/` `PUT`
     - 权限：普通用户、管理员
-    - 输入：`profile`（必须包含`nickname`和`user`）
+    - 输入：`profile`（必须包含`nickname`和`user_id`）
     - 输出：`profile`
     - 输出：{"detail":"No Profile matches the given query."}（`pk`值未匹配到）
     - 输出：{"detail":"未找到。"}（`pk`字段不合规范）
     - 输出：{"nickname":["该字段是必填项。"]}（输入不合规范）
-    - 输出：{"user":["该字段是必填项。"]}
+    - 输出：{"user_id":["该字段是必填项。"]}
     - 输出：{"used_lp":["请填写合法的数字。"]}（`pap`, `isk`, `skill`, `lp`, `used_lp`）
 - 删除用户
     - `/api/profiles/<pk>/` `DELETE`
