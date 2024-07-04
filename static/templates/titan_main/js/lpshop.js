@@ -1,28 +1,28 @@
 // 头像菜单栏
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const userAvatar = document.getElementById('userAvatar');
     const userMenu = document.getElementById('userMenu');
 
-    userAvatar.addEventListener('click', function(event) {
-      // 阻止点击事件冒泡
-      event.stopPropagation();
-      // 切换菜单显示/隐藏
-      userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+    userAvatar.addEventListener('click', function (event) {
+        // 阻止点击事件冒泡
+        event.stopPropagation();
+        // 切换菜单显示/隐藏
+        userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
     });
 
-    document.addEventListener('click', function() {
-      // 隐藏用户菜单
-      userMenu.style.display = 'none';
+    document.addEventListener('click', function () {
+        // 隐藏用户菜单
+        userMenu.style.display = 'none';
     });
 
-    userMenu.addEventListener('click', function(event) {
-      // 阻止点击事件冒泡到document，避免点击菜单项时菜单隐藏
-      event.stopPropagation();
+    userMenu.addEventListener('click', function (event) {
+        // 阻止点击事件冒泡到document，避免点击菜单项时菜单隐藏
+        event.stopPropagation();
     });
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 选择按钮元素
     var addItemBtn = document.getElementById('addItemBtn');
     // 选择表单元素
@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var selectItem3 = document.getElementById('data-service');
     var hdItemBox3 = document.getElementById('hd-box-3');
-    
+
     // 绑定点击事件处理函数
-    selectItem3.addEventListener('click', function() {
-       // 切换表单的显示状态
-       if (hdItemBox3.style.display === 'none' || hdItemBox3.style.display === '') {
-           hdItemBox3.style.display = 'block';
-       } else {
-           hdItemBox3.style.display = 'none';
+    selectItem3.addEventListener('click', function () {
+        // 切换表单的显示状态
+        if (hdItemBox3.style.display === 'none' || hdItemBox3.style.display === '') {
+            hdItemBox3.style.display = 'block';
+        } else {
+            hdItemBox3.style.display = 'none';
         }
         hdItemBox2.style.display = 'none';
         hdItemBox1.style.display = 'none';
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //     }
     //  });
 
-     // 绑定点击事件处理函数
-     selectItem2.addEventListener('click', function() {
+    // 绑定点击事件处理函数
+    selectItem2.addEventListener('click', function () {
         // 切换表单的显示状态
         if (hdItemBox2.style.display === 'none' || hdItemBox2.style.display === '') {
             hdItemBox2.style.display = 'block';
@@ -70,13 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         hdItemBox1.style.display = 'none';
         hdItemBox3.style.display = 'none';
-     });
-    
+    });
+
     // 绑定点击事件处理函数
-    selectItem.addEventListener('click', function() {
+    selectItem.addEventListener('click', function () {
         // 切换表单的显示状态
         if (hdItemBox1.style.display === 'none' || hdItemBox1.style.display === '') {
-           hdItemBox1.style.display = 'block';
+            hdItemBox1.style.display = 'block';
         } else {
             hdItemBox1.style.display = 'none';
         }
@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
         hdItemBox3.style.display = 'none';
     });
 
-     // 绑定点击事件处理函数
-     closeBtn.addEventListener('click', function() {
+    // 绑定点击事件处理函数
+    closeBtn.addEventListener('click', function () {
         // 切换表单的显示状态
         if (addItemForm.style.display === 'none' || addItemForm.style.display === '') {
             addItemForm.style.display = 'block';
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 绑定点击事件处理函数
     addItemBtn.addEventListener('click', function () {
-        
+
         // 切换表单的显示状态
         addItemForm.reset();
         addSmtBtn.style.display = 'block';
@@ -127,7 +127,7 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const itemsPerPage = 8;
     let currentPage = 0;
     const itemList = document.getElementById('itemList');
@@ -251,53 +251,53 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
                 },
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    throw new Error(data.error);
-                }
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
 
-                const imageUrl = data.url || data; // 确保正确获取图片URL
-                // 图片上传成功，继续发送商品信息
-                const itemData = {
-                    item_name: document.getElementById('itemName').value,
-                    item_price: document.getElementById('itemPrice').value,
-                    item_description: document.getElementById('itemDescription').value,
-                    item_image: imageUrl // 使用返回的图片URL
-                };
+                    const imageUrl = data.url || data; // 确保正确获取图片URL
+                    // 图片上传成功，继续发送商品信息
+                    const itemData = {
+                        item_name: document.getElementById('itemName').value,
+                        item_price: document.getElementById('itemPrice').value,
+                        item_description: document.getElementById('itemDescription').value,
+                        item_image: imageUrl // 使用返回的图片URL
+                    };
 
-                return fetch('/api/items/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
-                    },
-                    body: JSON.stringify(itemData)
+                    return fetch('/api/items/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
+                        },
+                        body: JSON.stringify(itemData)
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('数据输入错误！');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 处理最终的响应结果
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        // 添加data到items数组
+                        items.push(data);
+                        updateContent();
+                        updateButtons();
+                        addItemForm.reset();
+                        addItemForm.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('错误:', error);
+                    alert('发生错误: ' + error.message);
                 });
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('数据输入错误！');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // 处理最终的响应结果
-                if (data.message) {
-                    alert(data.message);
-                } else {
-                    // 添加data到items数组
-                    items.push(data);
-                    updateContent();
-                    updateButtons();
-                    addItemForm.reset();
-                    addItemForm.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('错误:', error);
-                alert('发生错误: ' + error.message);
-            });
         } else if (action === 'modify') {
             const fileInput = document.getElementById('itemImage');
             const itemData = {
@@ -334,46 +334,46 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
                     },
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        throw new Error(data.error);
-                    }
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            throw new Error(data.error);
+                        }
 
-                    // 图片上传成功，继续发送商品信息
-                    itemData.item_image = data.url || data;
+                        // 图片上传成功，继续发送商品信息
+                        itemData.item_image = data.url || data;
 
-                    // 发送商品信息更新请求
-                    return fetch(`/api/items/${itemData.item_id}/`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
-                        },
-                        body: JSON.stringify(itemData)
+                        // 发送商品信息更新请求
+                        return fetch(`/api/items/${itemData.item_id}/`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
+                            },
+                            body: JSON.stringify(itemData)
+                        });
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('数据输入错误！');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // 处理最终的响应结果
+                        if (data.message) {
+                            alert(data.message);
+                        } else {
+                            alert('商品修改成功');
+                            addItemForm.reset();
+                            addItemForm.style.display = 'none';
+                            fetchItems();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('错误:', error);
+                        alert('发生错误: ' + error.message);
                     });
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('数据输入错误！');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // 处理最终的响应结果
-                    if (data.message) {
-                        alert(data.message);
-                    } else {
-                        alert('商品修改成功');
-                        addItemForm.reset();
-                        addItemForm.style.display = 'none';
-                        fetchItems();
-                    }
-                })
-                .catch(error => {
-                    console.error('错误:', error);
-                    alert('发生错误: ' + error.message);
-                });
             } else {
                 // 如果没有上传新的图片，直接更新商品信息
                 fetch(`/api/items/${itemData.item_id}/`, {
@@ -384,27 +384,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     body: JSON.stringify(itemData)
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('数据输入错误！');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // 处理最终的响应结果
-                    if (data.message) {
-                        alert(data.message);
-                    } else {
-                        alert('商品修改成功');
-                        addItemForm.reset();
-                        addItemForm.style.display = 'none';
-                        fetchItems();
-                    }
-                })
-                .catch(error => {
-                    console.error('错误:', error);
-                    alert('发生错误: ' + error.message);
-                });
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('数据输入错误！');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // 处理最终的响应结果
+                        if (data.message) {
+                            alert(data.message);
+                        } else {
+                            alert('商品修改成功');
+                            addItemForm.reset();
+                            addItemForm.style.display = 'none';
+                            fetchItems();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('错误:', error);
+                        alert('发生错误: ' + error.message);
+                    });
             }
         }
     });

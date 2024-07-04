@@ -19,6 +19,7 @@ urlpatterns = [
     path('lpshop/', views.lpshop_view, name='lpshop'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('lpsent/', views.lpsent_view, name='lpsent'),
     path('is_authenticated/', views.is_authenticated_view, name='is_authenticated'),
     path('get_token_view/', views.get_token_view, name='get_token_view'),
     path('get_current_user/', views.get_current_user, name='get_current_user'),

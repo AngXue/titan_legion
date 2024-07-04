@@ -88,6 +88,11 @@ def get_current_user(request):
     return JsonResponse({'username': request.user.username, 'profile': profile})
 
 
+@login_required
+def lpsent_view(request):
+    return render(request, 'titan_main/html/lpcenter1.html')
+
+
 def upload_image(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)

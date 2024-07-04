@@ -1,4 +1,4 @@
-<!-- {#{% load static %}#} -->
+<!--{% load static %}-->
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../css/personalize.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-<!-- {#     <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">#} -->
-<!-- {#    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">#} -->
-<!-- {#    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">#} -->
+<!--    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">-->
+<!--    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">-->
+<!--    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">-->
 </head>
 <body>
      <header>
@@ -39,8 +39,8 @@
      <div class="content float-clear">
         <aside class="float-left">
              <!-- 首页 -->
-             <a class="home aside-item" href="./index.html">
-<!-- {#      <a class="home aside-item" href="{% url 'titan_main:home' %}">#} -->
+            <a class="home aside-item" href="./index.html">
+<!--            <a class="home aside-item" href="{% url 'titan_main:home' %}">-->
                 <div class="aside-item-icon">
                     <div class="img" id="img001"></div>
                 </div>
@@ -49,7 +49,8 @@
                 </div>
             </a>
             <!-- LP商城 -->
-            <a class="home aside-item" href="#">
+            <a class="home aside-item" href="./lpshop.html">
+<!--            <a class="home aside-item" href="{% url 'titan_main:lpshop' %}">-->
                 <div class="aside-item-icon">
                     <div class="img" id="img002"></div>
                 </div>
@@ -67,7 +68,8 @@
                 </div>
             </div>
             <div class="hd-box" id="hd-box-1">
-                <a class="home aside-item hd-1" href="#">
+                <a class="home aside-item hd-1" href="./lpcenter1.html">
+<!--                <a class="home aside-item hd-1" href="{% url 'titan_main:lpsent' %}">-->
                     <div class="aside-item-icon">
                         <div class="img" id="img00301"></div>
                     </div>
@@ -242,6 +244,7 @@
      </div>
      <script src="../js/lpshop.js"></script>
      <script src="../js/index.js"></script>
-<!-- {#     <script src="{% static 'templates/titan_main/js/index.js' %}"></scrip>#} -->
+<!--     <script src="{% static 'templates/titan_main/js/lpshop.js' %}"></script>-->
+<!--     <script src="{% static 'templates/titan_main/js/index.js' %}"></script>-->
 </body>
 </html>
