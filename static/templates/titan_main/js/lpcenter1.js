@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const grantLpButton = document.getElementById('grant-lp-button');
     const modifyLpBox = document.querySelector('.modify-lp-box');
     const modifyLpTbody = document.getElementById('modify-lp-tbody');
+    const modifyLpClose = document.querySelector('.modify-lp-close');
+
+    // 绑定点击事件：关闭表单
+    modifyLpClose.addEventListener('click', function () {
+        
+        // 切换表单的显示状态
+        modifyLpBox.style.display = 'none';
+    });
 
     // 获取数据并填充表格
     fetch('/api/profiles/')
