@@ -4,26 +4,30 @@ import environ
 import rest_framework.permissions
 from celery.schedules import crontab
 
+# 初始化 environ
+env = environ.Env(
+    # 设置默认值
+    DEBUG=(bool, True),
+    ESI_SSO_CALLBACK_URL=(str, "http://localhost:8000/sso/callback"),
+    ESI_USER_CONTACT_EMAIL=(str, "2434789129@qq.com"),
+)
+
+# 设置项目根目录
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 初始化环境变量
-env = environ.Env()
-
-environ.Env.read_env(env.str('ENV_PATH', '.env'))
-
-# 读取 .env 文件
-environ.Env.read_env()
+# 设置环境变量文件路径
+ENV_PATH = env.str('ENV_PATH', BASE_DIR / '.env')
+environ.Env.read_env(ENV_PATH)
 
 # 从环境变量中读取配置
 SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 SOCIAL_AUTH_EVEONLINE_KEY = env('SOCIAL_AUTH_EVEONLINE_KEY')
 SOCIAL_AUTH_EVEONLINE_SECRET = env('SOCIAL_AUTH_EVEONLINE_SECRET')
 ESI_SSO_CLIENT_ID = env('ESI_SSO_CLIENT_ID')
 ESI_SSO_CLIENT_SECRET = env('ESI_SSO_CLIENT_SECRET')
-ESI_SSO_CALLBACK_URL = env('ESI_SSO_CALLBACK_URL', default="http://localhost:8000/sso/callback")
-ESI_USER_CONTACT_EMAIL = env('ESI_USER_CONTACT_EMAIL', default="2434789129@qq.com")
-
-DEBUG = True
+ESI_SSO_CALLBACK_URL = env('ESI_SSO_CALLBACK_URL')
+ESI_USER_CONTACT_EMAIL = env('ESI_USER_CONTACT_EMAIL')
 
 ALLOWED_HOSTS = []
 
