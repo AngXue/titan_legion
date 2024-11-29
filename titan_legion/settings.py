@@ -1,23 +1,32 @@
 from pathlib import Path
 
+import environ
 import rest_framework.permissions
 from celery.schedules import crontab
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+# 初始化环境变量
+env = environ.Env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1*0n^5-$vaz!5a6roxknxte2@!o(^nx3fqskv!oa7(1vgc58oy'
+environ.Env.read_env(env.str('ENV_PATH', '.env'))
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# 读取 .env 文件
+environ.Env.read_env()
+
+# 从环境变量中读取配置
+SECRET_KEY = env('SECRET_KEY')
+SOCIAL_AUTH_EVEONLINE_KEY = env('SOCIAL_AUTH_EVEONLINE_KEY')
+SOCIAL_AUTH_EVEONLINE_SECRET = env('SOCIAL_AUTH_EVEONLINE_SECRET')
+ESI_SSO_CLIENT_ID = env('ESI_SSO_CLIENT_ID')
+ESI_SSO_CLIENT_SECRET = env('ESI_SSO_CLIENT_SECRET')
+ESI_SSO_CALLBACK_URL = env('ESI_SSO_CALLBACK_URL', default="http://localhost:8000/sso/callback")
+ESI_USER_CONTACT_EMAIL = env('ESI_USER_CONTACT_EMAIL', default="2434789129@qq.com")
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -61,13 +70,6 @@ LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
 LOGOUT_REDIRECT_URL = '/'  # 登出后的重定向URL
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'  # 登录成功后的重定向URL
-
-SOCIAL_AUTH_EVEONLINE_KEY = '2e4a5a73c3ba48c5a963da3a0d6a2f11'
-SOCIAL_AUTH_EVEONLINE_SECRET = 'pTVjXmEBCNmDW3itG4ZCVXlrBTkcYG1qIpjxPE1T'
-ESI_SSO_CLIENT_ID = '9e3e47f247964dd8b4053eb9a7a27a87'
-ESI_SSO_CLIENT_SECRET = 'cSQZo3OncGRyc01O41mULOoIufJGLErGQ9rZceD3'
-ESI_SSO_CALLBACK_URL = "http://localhost:8000/sso/callback"
-ESI_USER_CONTACT_EMAIL = "2434789129@qq.com"
 
 CELERYBEAT_SCHEDULE = {
     'esi_cleanup_callbackredirect': {
@@ -117,9 +119,6 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -135,9 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
@@ -145,9 +141,6 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -159,8 +152,5 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

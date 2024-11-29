@@ -2,3 +2,4 @@
 media/
 *.pyc
 *.sqlite3
+/.env

@@ -8,14 +8,14 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titan-主页</title>
-    <link rel="stylesheet" href="../css/personalize.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/lpcenter1.css">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-<!--    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">-->
-<!--    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">-->
-<!--    <link rel="stylesheet" href="{% static 'templates/titan_main/css/lpcenter1.css' %}">-->
-<!--    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">-->
+<!--    <link rel="stylesheet" href="../css/personalize.css">-->
+<!--    <link rel="stylesheet" href="../css/index.css">-->
+<!--    <link rel="stylesheet" href="../css/lpcenter1.css">-->
+<!--    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">-->
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/personalize.css' %}">
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'templates/titan_main/css/lpcenter1.css' %}">
+    <link rel="shortcut icon" href="{% static 'templates/titan_main/img/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
      <header>
@@ -41,8 +41,8 @@
      <div class="content float-clear">
         <aside class="float-left">
              <!-- 首页 -->
-             <a class="home aside-item" href="./index.html">
-<!--            <a class="home aside-item" href="{% url 'titan_main:home' %}">-->
+<!--             <a class="home aside-item" href="./index.html">-->
+            <a class="home aside-item" href="{% url 'titan_main:home' %}">
                 <div class="aside-item-icon">
                     <div class="img" id="img001"></div>
                 </div>
@@ -276,9 +276,9 @@
             </div>
         </div>
      </div>
-     <script src="../js/lpcenter1.js"></script>
-     <script src="../js/index.js"></script>
-<!--     <script src="{% static 'templates/titan_main/js/lpcenter1.js' %}"></script>-->
-<!--     <script src="{% static 'templates/titan_main/js/index.js' %}"></script>-->
+<!--     <script src="../js/lpcenter1.js"></script>-->
+<!--     <script src="../js/index.js"></script>-->
+     <script src="{% static 'templates/titan_main/js/lpcenter1.js' %}"></script>
+     <script src="{% static 'templates/titan_main/js/index.js' %}"></script>
 </body>
 </html>
