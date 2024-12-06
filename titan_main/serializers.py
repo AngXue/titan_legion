@@ -10,9 +10,12 @@ def validate_value(value, _range):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    __str__ = serializers.CharField(source='user.username', read_only=True)
+    
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['id', 'character_id', 'nickname', 'pap', 'isk', 'skill', 
+                 'lp', 'used_lp', 'user', '__str__']
 
 
 class ItemSerializer(serializers.ModelSerializer):

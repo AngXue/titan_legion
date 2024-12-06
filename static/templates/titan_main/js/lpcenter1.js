@@ -41,11 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
             data.forEach(profile => {
                 const tr = document.createElement('tr');
                 tr.classList.add('lpcenter1-table-tr');
-                tr.dataset.id = profile.id; // 将用户ID存储在行的data属性中
-                tr.dataset.user = profile.user; // 将user存储在行的data属性中
+                tr.dataset.id = profile.id;
+                tr.dataset.userId = profile.user;
                 tr.innerHTML = `
-                    <td>${profile.id}</td>
+                    <td>${profile.character_id}</td>
                     <td>${profile.nickname}</td>
+                    <td>${profile.__str__}</td>
                     <td>${profile.lp}</td>
                     <td>${profile.used_lp}</td>
                 `;
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modifyLpTbody.innerHTML = '';
          selectedRows.forEach(row => {
             const id = row.dataset.id; // 从data属性中获取用户ID
-            const user = row.dataset.user;
+            const user = row.dataset.userId;
             const nickname = row.cells[1].innerText;
             const remainingLp = row.cells[2].innerText;
             const tr = document.createElement('tr');
@@ -103,21 +104,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputs.forEach((input) => {
             const tr = input.closest('tr');
-            const id = tr.dataset.id; // 从data属性中获取用户ID
+            const id = tr.dataset.id;
             const user = tr.dataset.user;
-            const nickname = tr.cells[0].innerText;
-            const remainingLp = parseInt(tr.cells[1].innerText);
-            const modifyLp = parseInt(input.value);
-            const newLp = remainingLp + modifyLp;
+            
+            // 从原始表格中获取正确的数据
+            const originalRow = document.querySelector(`.lpcenter1-table-tr[data-id="${id}"]`);
+            const nickname = originalRow.cells[1].innerText;  // 从原始表格获取昵称
+            const modifyLp = parseFloat(input.value) || 0;
+            const currentLp = parseFloat(originalRow.cells[3].innerText) || 0;  // 从原始表格获取当前LP
+            const newLp = currentLp + modifyLp;
+
+            // 构建完整的请求数据
+            const requestData = {
+                nickname: nickname,  // 使用从原始表格获取的昵称
+                lp: newLp,          // 确保是数字
+                user: parseInt(user),
+                character_id: parseInt(originalRow.cells[0].innerText) || 0,  // 从原始表格获取角色ID
+                pap: 0,
+                isk: 0,
+                skill: 0,
+                used_lp: parseFloat(originalRow.cells[4].innerText) || 0  // 从原始表格获取已使用LP
+            };
+
+            console.log('Sending request data:', requestData);  // 调试用
 
             const updatePromise = fetch(`/api/profiles/${id}/`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken // 在请求头中包含CSRF令牌
+                    'X-CSRFToken': csrftoken
                 },
-                body: JSON.stringify({ lp: newLp, nickname: nickname, user: user})
-            }).then(response => response.json());
+                body: JSON.stringify({ lp: newLp })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(JSON.stringify(data));
+                    });
+                }
+                return response.json();
+            });
 
             updatePromises.push(updatePromise);
             updatedProfiles.push({ id: id, lp: newLp });
@@ -129,17 +155,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // 更新界面
                 updatedProfiles.forEach(profile => {
-                    const row = Array.from(document.querySelectorAll('.lpcenter1-table-tr'))
-                                     .find(row => row.dataset.id === profile.id.toString());
+                    const row = document.querySelector(`.lpcenter1-table-tr[data-id="${profile.id}"]`);
                     if (row) {
-                        row.cells[2].innerText = profile.lp;
+                        row.cells[3].innerText = profile.lp;
                     }
                 });
 
                 modifyLpBox.style.display = 'none';
             })
-            .catch(error => console.error('Error updating LP:', error));
+            .catch(error => {
+                console.error('Error updating LP:', error);
+                alert('更新失败：' + error.message);
+            });
     });
 
-})
+    // 添加菜单状态管理
+    const lpCenterMenu = document.getElementById('hd-box-1');  // 修改为正确的ID
+    const lpCenterButton = document.getElementById('LP-center');    // 修改为正确的ID
+
+    // 从 localStorage 恢复菜单状态
+    if (localStorage.getItem('lpMenuOpen') === 'true') {
+        lpCenterMenu.style.display = 'block';
+    }
+
+    // LP中心按钮点击事件
+    lpCenterButton.addEventListener('click', function(e) {
+        e.preventDefault();  // 阻止默认行为
+        
+        // 切换菜单显示状态
+        const isOpen = lpCenterMenu.style.display === 'block';
+        lpCenterMenu.style.display = isOpen ? 'none' : 'block';
+        
+        // 保存菜单状态
+        localStorage.setItem('lpMenuOpen', !isOpen);
+    });
+
+    // 确保当前页面是LP中心相关页面时，菜单保持展开
+    if (window.location.pathname.includes('lpcenter')) {
+        lpCenterMenu.style.display = 'block';
+        localStorage.setItem('lpMenuOpen', 'true');
+    }
+});
 
